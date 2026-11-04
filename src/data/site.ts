@@ -5,8 +5,8 @@ export const site = {
   title: 'Still Becoming',
   /** The three statement lines. */
   statement: ['Still becoming.', 'Still exploring.', 'Still building.'],
-  /** The life timeline's last frame, when the lines become a constellation. */
-  timelineFinale: ['Some lines walk beside you for a while.', 'Some stay in your sky.'],
+  /** Optional words for the life timeline's last frame (the constellation). Empty: none shown. */
+  timelineFinale: [] as string[],
   closing: ['The story is still being written.', 'Still becoming.'],
   /** Navigation labels and the scene index. */
   sections: [

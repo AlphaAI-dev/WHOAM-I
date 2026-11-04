@@ -116,7 +116,7 @@ export function Hero({ onChapter }: Props) {
           <p className="eyebrow m-0 text-mocha/70">
             A life
             <br />
-            in five
+            in six
             <br />
             chapters
           </p>

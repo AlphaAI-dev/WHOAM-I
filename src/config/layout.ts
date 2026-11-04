@@ -36,11 +36,12 @@ export const tree = {
    * The tip (last two numbers) is where the chapter marker sits.
    */
   branches: {
-    i: { path: [500, 430, 440, 410, 320, 380, 250, 330] as Cubic, labelSide: 'left' },
-    ii: { path: [500, 390, 470, 320, 410, 250, 360, 215] as Cubic, labelSide: 'left' },
-    iii: { path: [500, 380, 505, 280, 495, 200, 500, 150] as Cubic, labelSide: 'right' },
-    iv: { path: [500, 390, 530, 320, 590, 250, 640, 215] as Cubic, labelSide: 'right' },
-    v: { path: [500, 430, 560, 410, 680, 380, 750, 330] as Cubic, labelSide: 'right' },
+    i: { path: [500, 440, 440, 420, 320, 395, 240, 350] as Cubic, labelSide: 'left' },
+    ii: { path: [500, 405, 460, 350, 390, 290, 330, 245] as Cubic, labelSide: 'left' },
+    iii: { path: [500, 385, 480, 300, 450, 220, 430, 165] as Cubic, labelSide: 'left' },
+    iv: { path: [500, 385, 520, 300, 550, 220, 570, 165] as Cubic, labelSide: 'right' },
+    v: { path: [500, 405, 540, 350, 610, 290, 670, 245] as Cubic, labelSide: 'right' },
+    vi: { path: [500, 440, 560, 420, 680, 395, 760, 350] as Cubic, labelSide: 'right' },
   } satisfies Record<ChapterId, { path: Cubic; labelSide: 'left' | 'right' }>,
 
   /** Extra twigs on the trunk itself (x, y, angle in radians, length). */
@@ -78,14 +79,16 @@ export const tree = {
 export const constellation = {
   viewBox: { w: 1000, h: 640 },
   points: {
-    i: { x: 180, y: 420, labelSide: 'right' },
-    ii: { x: 330, y: 220, labelSide: 'right' },
-    iii: { x: 520, y: 140, labelSide: 'right' },
-    iv: { x: 700, y: 260, labelSide: 'right' },
-    v: { x: 840, y: 470, labelSide: 'left' },
+    // Heights alternate so the longer chapter names never share a line.
+    i: { x: 110, y: 480, labelSide: 'right' },
+    ii: { x: 240, y: 300, labelSide: 'right' },
+    iii: { x: 410, y: 130, labelSide: 'right' },
+    iv: { x: 540, y: 400, labelSide: 'right' },
+    v: { x: 700, y: 220, labelSide: 'right' },
+    vi: { x: 880, y: 500, labelSide: 'left' },
   } satisfies Record<ChapterId, { x: number; y: number; labelSide: 'left' | 'right' }>,
   /** The faint dotted line leading off the map from the last chapter. */
-  tail: { x: 960, y: 560 },
+  tail: { x: 960, y: 590 },
   starCount: 110,
   starSeed: 7,
 } as const;

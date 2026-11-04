@@ -58,11 +58,11 @@ export default function App() {
     [reduced],
   );
 
-  /** Chapters I–IV live on the life timeline; V (Unwritten) is the closing scene. */
+  /** Every chapter lives on the life timeline; going to one moves time to its start. */
   const goToChapter = useCallback(
     (id: ChapterId) => {
       setChapter(id);
-      if (id === 'v' || !timelineNav.go(chapterById[id].start, !reduced)) goToSection(id === 'v' ? 'closing' : 'timeline');
+      if (!timelineNav.go(chapterById[id].start, !reduced)) goToSection('timeline');
     },
     [goToSection, reduced],
   );

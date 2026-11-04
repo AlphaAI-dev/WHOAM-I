@@ -20,7 +20,7 @@ interface Props {
 const { w: VW, h: VH } = tree.viewBox;
 const pctX = (x: number) => `${(x / VW) * 100}%`;
 const pctY = (y: number) => `${(y / VH) * 100}%`;
-const TWIG_KEYS: TwigGroupKey[] = ['x', 'i', 'ii', 'iii', 'iv', 'v'];
+const TWIG_KEYS: TwigGroupKey[] = ['x', 'i', 'ii', 'iii', 'iv', 'v', 'vi'];
 
 /** 01 — The Founding Tree: the artwork with interactive SVG overlays, lit like a stage. */
 export function FoundingTree({ selected, onSelect, onEnter }: Props) {
@@ -80,7 +80,7 @@ export function FoundingTree({ selected, onSelect, onEnter }: Props) {
             01 — The Founding Tree
           </span>
           <h2 id="tree-title" data-reveal className="m-0 max-w-[16ch] font-serif text-[clamp(38px,5vw,76px)] leading-[0.95] font-normal">
-            Where every <em className="gold-text shimmer not-italic">chapter</em> grows from
+            From Bihar to <em className="gold-text shimmer not-italic">building with AI</em>
           </h2>
         </header>
 
@@ -225,7 +225,7 @@ export function FoundingTree({ selected, onSelect, onEnter }: Props) {
                 return (
                   <div
                     key={c.id}
-                    className="absolute"
+                    className="absolute hidden sm:block"
                     style={{
                       left: pctX(b.path[6]),
                       top: pctY(b.path[7]),
@@ -260,8 +260,52 @@ export function FoundingTree({ selected, onSelect, onEnter }: Props) {
                   </div>
                 );
               })}
+
+              {/* Phones: the tips are marked with dots; selection happens in the chips below. */}
+              {chapters.map((c) => {
+                const b = tree.branches[c.id];
+                const on = c.id === selected;
+                return (
+                  <span
+                    key={c.id}
+                    aria-hidden="true"
+                    className="absolute block -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-500 sm:hidden"
+                    style={{
+                      left: pctX(b.path[6]),
+                      top: pctY(b.path[7]),
+                      width: on ? 10 : 6,
+                      height: on ? 10 : 6,
+                      background: on ? C.ember : C.champagne,
+                      boxShadow: on ? '0 0 0 5px rgb(232 154 75 / 0.2), 0 0 18px 3px rgb(232 154 75 / 0.6)' : 'none',
+                    }}
+                  />
+                );
+              })}
             </div>
           </div>
+
+          {/* Phones: the six chapters as chips. */}
+          <ul className="m-0 flex w-full list-none flex-wrap gap-2 p-0 sm:hidden">
+            {chapters.map((c) => {
+              const on = c.id === selected;
+              return (
+                <li key={c.id}>
+                  <button
+                    type="button"
+                    onClick={() => onSelect(c.id)}
+                    aria-pressed={on}
+                    aria-label={`Chapter ${c.num}: ${c.name}`}
+                    className={`inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-[13px] ring-1 transition-colors ${
+                      on ? 'bg-amber/20 text-champagne ring-amber/60' : 'text-cream/70 ring-champagne/15'
+                    }`}
+                  >
+                    <span className="eyebrow text-champagne/60">{c.num}</span>
+                    {c.name}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
 
           {/* Selected chapter. */}
           <aside ref={asideRef} aria-live="polite" className="flex max-w-[380px] flex-[1_1_280px] flex-col gap-5 pb-6">
@@ -271,7 +315,7 @@ export function FoundingTree({ selected, onSelect, onEnter }: Props) {
             <h3 data-anim="swap" className="gold-text m-0 font-serif text-[clamp(48px,5vw,80px)] leading-[0.9] font-normal">
               {sel.name}
             </h3>
-            {!isPlaceholder(sel.summary) && (
+            {sel.summary && !isPlaceholder(sel.summary) && (
               <p data-anim="swap" className="m-0 text-base leading-[1.65] text-cream/70">
                 {sel.summary}
               </p>

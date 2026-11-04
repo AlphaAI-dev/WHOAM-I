@@ -36,19 +36,19 @@ export function DetailPanel({ selection, onClose }: Props) {
 
   let kind: string;
   let title: string;
-  let rows: { k: string; v: string }[];
-  let note: string;
+  let rows: { k: string; v?: string }[];
+  let note: string | undefined;
   if (selection.kind === 'person') {
     const p = selection.person;
     const c = chapterAt(p.start);
-    kind = 'Person';
+    kind = 'Line';
     title = p.name;
     rows = [
       { k: 'Relationship', v: p.relation },
       { k: 'Enters', v: p.enters },
       ...(p.leaves ? [{ k: p.status === 'ended' ? 'Until' : 'Leaves', v: p.leaves }] : []),
       { k: 'Line', v: STATUS[p.status] },
-      { k: 'Chapter', v: `${c.num} — ${c.name}` },
+      { k: 'Joins in', v: `${c.num} — ${c.name}` },
     ];
     note = p.note;
   } else {
@@ -63,7 +63,7 @@ export function DetailPanel({ selection, onClose }: Props) {
     note = m.note;
   }
   // Fields that are still placeholders are simply left out.
-  rows = rows.filter((r) => r.v && !isPlaceholder(r.v));
+  const shown = rows.filter((r): r is { k: string; v: string } => !!r.v && !isPlaceholder(r.v));
   const showNote = !!note && !isPlaceholder(note);
 
   return (
@@ -92,7 +92,7 @@ export function DetailPanel({ selection, onClose }: Props) {
         {title}
       </h3>
       <dl data-anim="swap" className="m-0 flex flex-col gap-2.5">
-        {rows.map((r) => (
+        {shown.map((r) => (
           <div key={r.k} className="flex justify-between gap-4 border-b border-champagne/10 pb-2.5">
             <dt className="eyebrow text-cream/50">{r.k}</dt>
             <dd className="m-0 text-right text-[15px]">{r.v}</dd>

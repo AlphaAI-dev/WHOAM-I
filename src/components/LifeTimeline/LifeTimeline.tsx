@@ -257,8 +257,11 @@ export function LifeTimeline() {
           ref={finaleRef}
           className="pointer-events-none absolute inset-x-0 bottom-[14svh] z-10 flex flex-col items-center gap-2 px-6 text-center opacity-0"
         >
-          <p className="m-0 font-serif text-[clamp(28px,3.6vw,52px)] leading-tight text-cream">{site.timelineFinale[0]}</p>
-          <p className="m-0 font-serif text-[clamp(22px,2.6vw,36px)] text-champagne/80 italic">{site.timelineFinale[1]}</p>
+          {site.timelineFinale.map((line, i) => (
+            <p key={line} className={`m-0 font-serif leading-tight ${i === 0 ? 'text-[clamp(28px,3.6vw,52px)] text-cream' : 'text-[clamp(22px,2.6vw,36px)] text-champagne/80 italic'}`}>
+              {line}
+            </p>
+          ))}
         </div>
 
         <div ref={hintRef} className="pointer-events-none absolute bottom-8 left-1/2 z-10 -translate-x-1/2">

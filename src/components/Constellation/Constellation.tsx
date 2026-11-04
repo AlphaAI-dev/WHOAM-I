@@ -165,8 +165,8 @@ export default function Constellation({ selected, onSelect, onClose, onNavigate 
                 })}
                 <line
                   data-anim="tail"
-                  x1={C.points.v.x}
-                  y1={C.points.v.y}
+                  x1={C.points.vi.x}
+                  y1={C.points.vi.y}
                   x2={C.tail.x}
                   y2={C.tail.y}
                   stroke={colors.champagne}

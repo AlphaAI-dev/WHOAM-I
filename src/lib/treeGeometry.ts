@@ -34,14 +34,14 @@ export interface TreeGeometry {
   leaves: Leaf[];
 }
 
-const CHAPTER_ORDER: ChapterId[] = ['i', 'ii', 'iii', 'iv', 'v'];
+const CHAPTER_ORDER: ChapterId[] = ['i', 'ii', 'iii', 'iv', 'v', 'vi'];
 
 export function buildTree(seed: number = tree.growthSeed): TreeGeometry {
   const rnd = seeded(seed);
   for (let i = 0; i < 5; i++) rnd();
 
   const empty = (): TwigGroup => ({ n: '', l: '', d: '', lit: 0, dark: 0 });
-  const groups = { i: empty(), ii: empty(), iii: empty(), iv: empty(), v: empty(), x: empty() } as Record<
+  const groups = { i: empty(), ii: empty(), iii: empty(), iv: empty(), v: empty(), vi: empty(), x: empty() } as Record<
     TwigGroupKey,
     TwigGroup
   >;
