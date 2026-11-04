@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Still Becoming — Founding Tree</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#111110}
+.sb{font-family:'Inter Tight',system-ui,sans-serif;color:#F2EFE8;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.sb button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.sb button:focus-visible,.sb a:focus-visible{outline:1px solid #FF5A1F;outline-offset:4px}
+a{color:#F2EFE8}a:hover{color:#FF5A1F}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes breathe{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.fade{opacity:0;animation:fade 1.8s ease forwards}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s cubic-bezier(.65,0,.35,1) forwards}
+.breathe{animation:breathe 4.5s ease-in-out infinite}
+.drift{animation:drift 8s ease-in-out infinite}
+.twig{transition:stroke-opacity .5s ease}
+@media (prefers-reduced-motion:reduce){.sb .fade{opacity:1;animation:none}.sb .draw{stroke-dashoffset:0;animation:none}.sb .breathe,.sb .drift{animation:none}.sb .twig{transition:none}}
+.rm .fade{opacity:1;animation:none}.rm .draw{stroke-dashoffset:0;animation:none}.rm .breathe,.rm .drift{animation:none}.rm .twig{transition:none}
+</style>
+</helmet>
+<main class="{{rootClass}}" style="position: relative; box-sizing: border-box; width: 100%; min-height: 100vh; padding: 32px clamp(20px, 5vw, 72px); background: #111110; color: #F2EFE8; display: flex; flex-direction: column; gap: 24px; overflow: hidden">
+<header style="display: flex; justify-content: space-between; align-items: center; gap: 16px">
+<span class="mono" style="font-size: 12px; letter-spacing: 0.22em; color: #8C8A84">STILL BECOMING</span>
+<span class="mono" style="font-size: 12px; letter-spacing: 0.12em; color: #8C8A84">01 — The Founding Tree</span>
+</header>
+<section style="flex-grow: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 32px">
+<div style="flex: 999 1 640px; min-width: 0; display: flex; justify-content: center">
+<div style="position: relative; width: 100%; max-width: 1000px; aspect-ratio: 1000 / 760">
+<div style="position: absolute; top: 2%; left: 8%; right: 8%; bottom: 2%; border: 1px dashed rgba(242,239,232,0.08); border-radius: 8px; display: flex; align-items: flex-end; justify-content: flex-end; padding: 12px; box-sizing: border-box">
+<span class="mono" style="font-size: 10px; letter-spacing: 0.14em; color: #8C8A84">TREE ASSET 02 · OVERLAYS ALIGN TO ITS BRANCHES</span>
+</div>
+<svg viewBox="0 0 1000 760" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible">
+<line x1="200" y1="600" x2="800" y2="600" stroke="#F2EFE8" stroke-opacity="0.1" stroke-width="1"></line>
+<g class="breathe" fill="none" stroke="#FF5A1F" stroke-linecap="round">
+<path d="{{roots}}" stroke-width="5" stroke-opacity="0.07"></path>
+<path d="{{roots}}" stroke-width="1" stroke-opacity="0.65"></path>
+</g>
+<g fill="none" stroke-linecap="round">
+<path class="draw" d="M500 600 C496 520 504 450 500 380" pathLength="1" stroke="#F2EFE8" stroke-opacity="0.4" stroke-width="2"></path>
+<g class="fade" style="animation-delay: 1.6s">
+<path class="twig" d="{{tw.x.n}}" stroke="#F2EFE8" stroke-opacity="{{tw.x.nop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.i.n}}" stroke="#F2EFE8" stroke-opacity="{{tw.i.nop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.ii.n}}" stroke="#F2EFE8" stroke-opacity="{{tw.ii.nop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.iii.n}}" stroke="#F2EFE8" stroke-opacity="{{tw.iii.nop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.iv.n}}" stroke="#F2EFE8" stroke-opacity="{{tw.iv.nop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.v.n}}" stroke="#F2EFE8" stroke-opacity="{{tw.v.nop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.x.d}}" stroke="#F2EFE8" stroke-opacity="{{tw.x.dop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.i.d}}" stroke="#F2EFE8" stroke-opacity="{{tw.i.dop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.ii.d}}" stroke="#F2EFE8" stroke-opacity="{{tw.ii.dop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.iii.d}}" stroke="#F2EFE8" stroke-opacity="{{tw.iii.dop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.iv.d}}" stroke="#F2EFE8" stroke-opacity="{{tw.iv.dop}}" stroke-width="0.8"></path>
+<path class="twig" d="{{tw.v.d}}" stroke="#F2EFE8" stroke-opacity="{{tw.v.dop}}" stroke-width="0.8"></path>
+</g>
+<g class="fade" style="animation-delay: 2.4s">
+<g class="breathe">
+<path d="{{litAll}}" stroke="#FF5A1F" stroke-opacity="0.08" stroke-width="5"></path>
+<path class="twig" d="{{tw.x.l}}" stroke="#FF5A1F" stroke-opacity="{{tw.x.lop}}" stroke-width="0.9"></path>
+<path class="twig" d="{{tw.i.l}}" stroke="#FF5A1F" stroke-opacity="{{tw.i.lop}}" stroke-width="0.9"></path>
+<path class="twig" d="{{tw.ii.l}}" stroke="#FF5A1F" stroke-opacity="{{tw.ii.lop}}" stroke-width="0.9"></path>
+<path class="twig" d="{{tw.iii.l}}" stroke="#FF5A1F" stroke-opacity="{{tw.iii.lop}}" stroke-width="0.9"></path>
+<path class="twig" d="{{tw.iv.l}}" stroke="#FF5A1F" stroke-opacity="{{tw.iv.lop}}" stroke-width="0.9"></path>
+<path class="twig" d="{{tw.v.l}}" stroke="#FF5A1F" stroke-opacity="{{tw.v.lop}}" stroke-width="0.9"></path>
+</g>
+</g>
+<path class="draw" d="M500 430 C440 410 320 380 250 330" pathLength="1" stroke="{{b.i.stroke}}" stroke-opacity="{{b.i.op}}" stroke-width="1.3" style="animation-delay: 0.8s"></path>
+<path class="draw" d="M500 390 C470 320 410 250 360 215" pathLength="1" stroke="{{b.ii.stroke}}" stroke-opacity="{{b.ii.op}}" stroke-width="1.3" style="animation-delay: 1.0s"></path>
+<path class="draw" d="M500 380 C505 280 495 200 500 150" pathLength="1" stroke="{{b.iii.stroke}}" stroke-opacity="{{b.iii.op}}" stroke-width="1.3" style="animation-delay: 1.2s"></path>
+<path class="draw" d="M500 390 C530 320 590 250 640 215" pathLength="1" stroke="{{b.iv.stroke}}" stroke-opacity="{{b.iv.op}}" stroke-width="1.3" style="animation-delay: 1.4s"></path>
+<path class="draw" d="M500 430 C560 410 680 380 750 330" pathLength="1" stroke="{{b.v.stroke}}" stroke-opacity="{{b.v.op}}" stroke-width="1.3" style="animation-delay: 1.6s"></path>
+</g>
+<g fill="#F2EFE8">
+<circle class="drift" cx="410" cy="250" r="1.4" fill-opacity="0.5" style="animation-delay: 0s"></circle>
+<circle class="drift" cx="590" cy="190" r="1.2" fill-opacity="0.4" style="animation-delay: 1.5s"></circle>
+<circle class="drift" cx="680" cy="300" r="1.6" fill-opacity="0.35" style="animation-delay: 3s"></circle>
+<circle class="drift" cx="310" cy="360" r="1.2" fill-opacity="0.4" style="animation-delay: 4.5s"></circle>
+<circle class="drift" cx="530" cy="110" r="1" fill-opacity="0.5" style="animation-delay: 2.2s"></circle>
+<circle class="drift" fill="#FF5A1F" cx="460" cy="300" r="1.4" fill-opacity="0.6" style="animation-delay: 5s"></circle>
+</g>
+</svg>
+<div aria-hidden="true" class="fade" style="position: absolute; inset: 0; pointer-events: none; animation-delay: 2.8s">
+<sc-for list="{{leaves}}" as="lf" hint-placeholder-count="0">
+<span class="{{lf.cls}}" style="{{lf.style}}"></span>
+</sc-for>
+</div>
+<sc-for list="{{chapters}}" as="c" hint-placeholder-count="5">
+<button class="fade" type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" aria-label="Chapter {{c.num}}: {{c.name}}" style="{{c.btnStyle}}">
+<span style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center; flex-shrink: 0">
+<span style="{{c.dotStyle}}"></span>
+</span>
+<span style="display: flex; align-items: baseline; gap: 8px; white-space: nowrap; padding: 3px 8px; border-radius: 4px; background: rgba(17,17,16,0.86)">
+<span class="mono" style="font-size: 11px; letter-spacing: 0.12em; color: #8C8A84">{{c.num}}</span>
+<span class="serif" style="{{c.nameStyle}}">{{c.name}}</span>
+</span>
+</button>
+</sc-for>
+</div>
+</div>
+<aside style="flex: 1 1 280px; max-width: 360px; display: flex; flex-direction: column; gap: 16px; padding-bottom: 24px">
+<span class="mono" style="font-size: 12px; letter-spacing: 0.16em; color: #FF5A1F">CHAPTER {{sel.num}}</span>
+<h2 class="serif" style="margin: 0; font-size: clamp(40px, 4vw, 56px); line-height: 1; font-weight: 400">{{sel.name}}</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #8C8A84">[Two or three lines on what this chapter holds. Written by you.]</p>
+<div class="mono" style="display: flex; gap: 20px; font-size: 11px; letter-spacing: 0.12em; color: #8C8A84">
+<span style="display: inline-flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: #FF5A1F; box-shadow: 0 0 8px 1px rgba(255,90,31,0.4)"></span>{{sel.lit}} glowing</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 6px; height: 6px; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(242,239,232,0.3)"></span>{{sel.dark}} dark</span>
+</div>
+<a href="{{sel.href}}" class="mono" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; font-size: 12px; letter-spacing: 0.16em; text-decoration: none; border-bottom: 1px solid rgba(242,239,232,0.3)">ENTER CHAPTER →</a>
+</aside>
+</section>
+<footer class="mono" style="font-size: 11px; letter-spacing: 0.12em; color: #8C8A84">Select a branch. The small ones are aspects: some glow, some stay dark.</footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"reduceMotion":{"editor":"boolean","default":false,"section":"Motion"},"growthSeed":{"editor":"int","default":11,"min":1,"max":999,"section":"Branches"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+constructor(p) { super(p); this.state = { sel: 'iii' }; }
+build(seedIn) {
+if (this._t && this._seed === seedIn) return this._t;
+let seed = seedIn;
+const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+for (let i = 0; i < 5; i++) rnd();
+const f = (v) => v.toFixed(1);
+const bez = (p, t) => { const u = 1 - t; return [u*u*u*p[0] + 3*u*u*t*p[2] + 3*u*t*t*p[4] + t*t*t*p[6], u*u*u*p[1] + 3*u*u*t*p[3] + 3*u*t*t*p[5] + t*t*t*p[7]]; };
+const mains = [
+{ id: 'i', num: 'I', name: 'Roots', p: [500,430,440,410,320,380,250,330], left: true, href: 'Timeline.dc.html' },
+{ id: 'ii', num: 'II', name: 'Learning', p: [500,390,470,320,410,250,360,215], left: true, href: 'Timeline.dc.html' },
+{ id: 'iii', num: 'III', name: 'Building', p: [500,380,505,280,495,200,500,150], left: false, href: 'Timeline.dc.html' },
+{ id: 'iv', num: 'IV', name: 'People', p: [500,390,530,320,590,250,640,215], left: false, href: 'Timeline.dc.html' },
+{ id: 'v', num: 'V', name: 'Unwritten', p: [500,430,560,410,680,380,750,330], left: false, href: 'Unfinished.dc.html' }
+];
+const groups = {};
+['i','ii','iii','iv','v','x','roots'].forEach((k) => { groups[k] = { n: '', l: '', d: '', lit: 0, dark: 0 }; });
+const leaves = [];
+const grow = (key, x, y, ang, len, depth, max, kind) => {
+const g = groups[key];
+const x2 = x + Math.cos(ang) * len, y2 = y + Math.sin(ang) * len;
+const bnd = (rnd() - 0.5) * 0.5 * len;
+const cx = (x + x2) / 2 - Math.sin(ang) * bnd, cy = (y + y2) / 2 + Math.cos(ang) * bnd;
+let k = kind;
+if (key !== 'roots' && depth === 2) { const r = rnd(); k = r < 0.26 ? 'l' : r < 0.5 ? 'd' : 'n'; }
+else if (key !== 'roots' && depth > 2 && kind === 'l' && rnd() < 0.25) k = 'n';
+g[k] += 'M' + f(x) + ' ' + f(y) + ' Q' + f(cx) + ' ' + f(cy) + ' ' + f(x2) + ' ' + f(y2) + ' ';
+if (depth < max) {
+const kids = rnd() < 0.35 ? 3 : 2;
+for (let i = 0; i < kids; i++) {
+const spread = kids === 3 ? (i - 1) * 0.55 : (i === 0 ? -1 : 1) * (0.3 + rnd() * 0.25);
+grow(key, x2, y2, ang + spread + (rnd() - 0.5) * 0.15, len * (0.6 + rnd() * 0.14), depth + 1, max, k);
+}
+} else if (key !== 'roots') {
+if (k === 'l') { g.lit++; leaves.push({ kind: 'l', x: x2, y: y2 }); }
+if (k === 'd') { g.dark++; leaves.push({ kind: 'd', x: x2, y: y2 }); }
+}
+};
+mains.forEach((m) => {
+const p = m.p;
+const base = Math.atan2(p[7] - p[5], p[6] - p[4]);
+const kids = rnd() < 0.5 ? 3 : 2;
+for (let i = 0; i < kids; i++) {
+const spread = kids === 3 ? (i - 1) * 0.5 : (i === 0 ? -0.4 : 0.4);
+grow(m.id, p[6], p[7], base + spread, 56 + rnd() * 10, 1, 3, 'n');
+}
+[0.42, 0.68].forEach((t) => {
+const a = bez(p, t - 0.03), c = bez(p, t + 0.03), at = bez(p, t);
+const tan = Math.atan2(c[1] - a[1], c[0] - a[0]);
+const o1 = tan - 0.95, o2 = tan + 0.95;
+const side = Math.sin(o1) < Math.sin(o2) ? o1 : o2;
+grow(m.id, at[0], at[1], side, 40 + rnd() * 10, 2, 3, 'n');
+});
+});
+grow('x', 500, 520, -2.55, 72, 1, 4, 'n');
+grow('x', 500, 505, -0.6, 72, 1, 4, 'n');
+grow('x', 500, 470, -2.0, 50, 2, 3, 'n');
+grow('x', 500, 455, -1.15, 50, 2, 3, 'n');
+[168, 138, 104, 78, 42, 12].forEach((deg) => {
+grow('roots', 500, 600, deg * Math.PI / 180, 58 + rnd() * 10, 1, 3, 'n');
+});
+this._seed = seedIn;
+this._t = { mains, groups, leaves };
+return this._t;
+}
+renderVals() {
+const t = this.build(this.props.growthSeed ?? 11);
+const sel = this.state.sel;
+const tw = {};
+let litAll = '';
+['i','ii','iii','iv','v','x'].forEach((k) => {
+const g = t.groups[k];
+const on = k === sel;
+litAll += g.l;
+tw[k] = { n: g.n || 'M0 0', l: g.l || 'M0 0', d: g.d || 'M0 0', nop: on ? 0.62 : 0.26, lop: on ? 1 : 0.75, dop: on ? 0.16 : 0.08 };
+});
+const leaves = t.leaves.map((lf, i) => {
+const pos = 'position: absolute; left: ' + (lf.x / 10).toFixed(2) + '%; top: ' + (lf.y / 7.6).toFixed(2) + '%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; box-sizing: border-box;';
+return lf.kind === 'l'
+? { cls: 'breathe', style: pos + ' background: #FF5A1F; box-shadow: 0 0 10px 2px rgba(255,90,31,0.35); animation-delay: -' + ((i * 0.73) % 4.5).toFixed(2) + 's' }
+: { cls: '', style: pos + ' border: 1px solid rgba(242,239,232,0.18); background: #111110' };
+});
+const chapters = t.mains.map((c, i) => {
+const on = c.id === sel;
+const shift = c.left ? 'calc(-100% + 22px)' : '-22px';
+return {
+num: c.num, name: c.name,
+pressed: on ? 'true' : 'false',
+pick: () => this.setState({ sel: c.id }),
+btnStyle: 'position: absolute; left: ' + (c.p[6] / 10) + '%; top: ' + (c.p[7] / 7.6).toFixed(2) + '%; transform: translate(' + shift + ', -50%); display: flex; flex-direction: ' + (c.left ? 'row-reverse' : 'row') + '; align-items: center; gap: 6px; min-height: 44px; padding: 10px; animation-delay: ' + (1.8 + i * 0.15) + 's',
+dotStyle: on ? 'width: 10px; height: 10px; border-radius: 50%; background: #FF5A1F; box-shadow: 0 0 0 6px rgba(255,90,31,0.16)' : 'width: 7px; height: 7px; border-radius: 50%; background: #F2EFE8',
+nameStyle: 'font-size: 22px; line-height: 1; color: ' + (on ? '#F2EFE8' : '#8C8A84')
+};
+});
+const b = {};
+t.mains.forEach((m) => { b[m.id] = m.id === sel ? { stroke: '#FF5A1F', op: 0.95 } : { stroke: '#F2EFE8', op: 0.45 }; });
+const s = t.mains.find((m) => m.id === sel);
+return {
+rootClass: this.props.reduceMotion ? 'sb rm' : 'sb',
+roots: t.groups.roots.n || 'M0 0',
+litAll: litAll || 'M0 0',
+tw, b, leaves, chapters,
+sel: { num: s.num, name: s.name, href: s.href, lit: t.groups[sel].lit, dark: t.groups[sel].dark }
+};
+}
+}
+</script>
+</body>
+</html>
