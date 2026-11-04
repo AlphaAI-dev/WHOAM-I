@@ -44,15 +44,15 @@ Open the URL Vite prints (usually http://localhost:5173).
 
 ## Editing content
 
-All personal content lives in `src/data/`. Anything in `[square brackets]`
-is a placeholder: the site marks it with a small **PLACEHOLDER** tag until
-you replace it. No personal stories have been invented: every name, year
-and note is yours to write.
+All personal content lives in `src/data/`. The site shows only confirmed content
+(chapters and people from Rohit's own content file). Anything empty or still
+in `[square brackets]` is simply not shown. No personal stories have been
+invented: every summary, year, note and moment is yours to add.
 
 | File | Contains |
 |---|---|
 | `src/data/site.ts` | Name, statement, the timeline's last lines, closing lines, scene labels |
-| `src/data/chapters.ts` | The five chapters, their summaries, where each starts on the timeline, and how they connect on the map |
+| `src/data/chapters.ts` | The six chapters, optional summaries, where each starts on the timeline, `now`, and how they connect on the map |
 | `src/data/people.ts` | People on the life timeline |
 | `src/data/timeline.ts` | Moments on your own line |
 
@@ -170,7 +170,16 @@ Measured on the production build in headless Chrome, with no GPU:
 
 ---
 
-## Deployment (Cloudflare Pages)
+## Deployment (Vercel)
+
+Live at **https://still-becoming-rohit.vercel.app** (Vercel project `still-becoming-rohit`).
+
+`vercel.json` holds the settings: Vite, `npm ci`, `npm run build`, output `dist`,
+and permanent caching for `/assets` and `/fonts`. To deploy automatically on
+every push, open the project in Vercel → **Settings → Git** and connect
+`AlphaAI-dev/WHOAM-I` with `main` as the production branch.
+
+## Deployment (Cloudflare Pages, alternative)
 
 The production build is a static site in `dist/`.
 
