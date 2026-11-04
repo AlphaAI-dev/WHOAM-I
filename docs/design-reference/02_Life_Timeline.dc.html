@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Still Becoming — Life Timeline</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#111110}
+.sb{font-family:'Inter Tight',system-ui,sans-serif;color:#F2EFE8;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.sb button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.sb button:focus-visible,.sb a:focus-visible{outline:1px solid #FF5A1F;outline-offset:4px}
+a{color:#F2EFE8}a:hover{color:#FF5A1F}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.fade{opacity:0;animation:fade 1.2s ease forwards}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.2s cubic-bezier(.65,0,.35,1) forwards}
+@media (prefers-reduced-motion:reduce){.sb .fade{opacity:1;animation:none}.sb .draw{stroke-dashoffset:0;animation:none}}
+.rm .fade{opacity:1;animation:none}.rm .draw{stroke-dashoffset:0;animation:none}
+</style>
+</helmet>
+<main class="{{rootClass}}" style="position: relative; box-sizing: border-box; width: 100%; min-height: 100vh; padding: 32px clamp(20px, 5vw, 72px); background: #111110; color: #F2EFE8; display: flex; flex-direction: column; gap: 24px">
+<header style="display: flex; justify-content: space-between; align-items: center; gap: 16px">
+<span class="mono" style="font-size: 12px; letter-spacing: 0.22em; color: #8C8A84">STILL BECOMING</span>
+<span class="mono" style="font-size: 12px; letter-spacing: 0.12em; color: #8C8A84">02 — Life timeline</span>
+</header>
+<section style="flex-grow: 1; display: flex; flex-wrap: wrap; align-items: stretch; gap: 32px">
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 16px">
+<div style="position: relative; width: 100%; max-width: 1200px; aspect-ratio: 1200 / 760; margin: 0 auto">
+<svg viewBox="0 0 1200 760" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible">
+<g fill="none" stroke-linecap="round">
+<path class="draw" d="M600 30 L600 700" pathLength="1" stroke="#F2EFE8" stroke-width="1.6"></path>
+<path class="fade" d="M600 706 L600 752" stroke="#F2EFE8" stroke-opacity="0.5" stroke-width="1.6" stroke-dasharray="2 6" style="animation-delay: 2.2s"></path>
+<path class="draw" d="M600 70 C570 85 540 100 540 135 L540 700" pathLength="1" stroke="{{pA.stroke}}" stroke-opacity="{{pA.op}}" stroke-width="1.1" style="animation-delay: 0.6s"></path>
+<path class="fade" d="M540 706 L540 742" stroke="{{pA.stroke}}" stroke-opacity="{{pA.op}}" stroke-width="1.1" stroke-dasharray="2 6" style="animation-delay: 2.8s"></path>
+<path class="draw" d="M600 210 C630 225 660 235 660 270 L660 430" pathLength="1" stroke="{{pB.stroke}}" stroke-opacity="{{pB.op}}" stroke-width="1.1" style="animation-delay: 1.2s"></path>
+<path class="fade" d="M660 430 C660 480 760 500 900 530" stroke="{{pB.stroke}}" stroke-opacity="{{pB.op}}" stroke-width="1.1" stroke-dasharray="3 6" style="animation-delay: 3s"></path>
+<path class="draw" d="M600 330 C570 345 470 350 470 390 L470 560" pathLength="1" stroke="{{pC.stroke}}" stroke-opacity="{{pC.op}}" stroke-width="1.1" style="animation-delay: 1.8s"></path>
+<path class="draw" d="M600 540 C630 555 720 560 720 600 L720 700" pathLength="1" stroke="{{pD.stroke}}" stroke-opacity="{{pD.op}}" stroke-width="1.1" style="animation-delay: 2.4s"></path>
+<path class="fade" d="M720 706 L720 742" stroke="{{pD.stroke}}" stroke-opacity="{{pD.op}}" stroke-width="1.1" stroke-dasharray="2 6" style="animation-delay: 3.6s"></path>
+</g>
+<g class="fade" style="animation-delay: 1s">
+<circle cx="600" cy="70" r="3.5" fill="{{pA.stroke}}"></circle>
+<circle cx="600" cy="210" r="3.5" fill="{{pB.stroke}}"></circle>
+<circle cx="600" cy="330" r="3.5" fill="{{pC.stroke}}"></circle>
+<circle cx="600" cy="540" r="3.5" fill="{{pD.stroke}}"></circle>
+<circle cx="470" cy="560" r="3" fill="#111110" stroke="{{pC.stroke}}" stroke-width="1.2"></circle>
+<rect x="595" y="145" width="10" height="10" transform="rotate(45 600 150)" fill="{{e1.fill}}"></rect>
+<rect x="595" y="445" width="10" height="10" transform="rotate(45 600 450)" fill="{{e2.fill}}"></rect>
+<rect x="595" y="635" width="10" height="10" transform="rotate(45 600 640)" fill="{{e3.fill}}"></rect>
+</g>
+</svg>
+<span class="mono fade" style="position: absolute; left: 50%; top: 1.2%; transform: translate(-50%, -100%); font-size: 11px; letter-spacing: 0.2em; color: #F2EFE8">YOU</span>
+<sc-for list="{{rail}}" as="r" hint-placeholder-count="4">
+<span class="mono fade" style="{{r.style}}">{{r.year}}</span>
+</sc-for>
+<sc-for list="{{items}}" as="it" hint-placeholder-count="7">
+<button class="fade" type="button" onClick="{{it.pick}}" aria-pressed="{{it.pressed}}" style="{{it.btnStyle}}">
+<span class="{{it.labelClass}}" style="{{it.labelStyle}}">{{it.label}}</span>
+<span class="mono" style="font-size: 10px; letter-spacing: 0.14em; color: #8C8A84">{{it.sub}}</span>
+</button>
+</sc-for>
+</div>
+<div class="mono" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 11px; letter-spacing: 0.1em; color: #8C8A84">
+<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="28" height="8" aria-hidden="true"><line x1="0" y1="4" x2="28" y2="4" stroke="#F2EFE8" stroke-width="1.2"></line></svg>Still here</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="28" height="8" aria-hidden="true"><line x1="0" y1="4" x2="28" y2="4" stroke="#F2EFE8" stroke-width="1.2" stroke-dasharray="3 5"></line></svg>Branched away</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="28" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" stroke="#F2EFE8" stroke-width="1.2"></line><circle cx="24" cy="4" r="2.6" fill="#111110" stroke="#F2EFE8" stroke-width="1.2"></circle></svg>Ended</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><svg width="12" height="12" aria-hidden="true"><rect x="3" y="3" width="6" height="6" transform="rotate(45 6 6)" fill="#F2EFE8"></rect></svg>Moment</span>
+</div>
+</div>
+<aside aria-live="polite" style="flex: 1 1 300px; max-width: 380px; box-sizing: border-box; padding: 32px 0 32px 32px; border-left: 1px solid rgba(242,239,232,0.12); display: flex; flex-direction: column; gap: 20px; justify-content: center">
+<span class="mono" style="font-size: 12px; letter-spacing: 0.16em; color: #FF5A1F">{{panel.kind}}</span>
+<h2 class="serif" style="margin: 0; font-size: clamp(40px, 3.6vw, 52px); line-height: 1; font-weight: 400">{{panel.title}}</h2>
+<dl style="margin: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{panel.rows}}" as="row" hint-placeholder-count="3">
+<div style="display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(242,239,232,0.08)">
+<dt class="mono" style="font-size: 11px; letter-spacing: 0.14em; color: #8C8A84">{{row.k}}</dt>
+<dd style="margin: 0; font-size: 15px; text-align: right">{{row.v}}</dd>
+</div>
+</sc-for>
+</dl>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #8C8A84">{{panel.note}}</p>
+<span class="mono" style="font-size: 10px; letter-spacing: 0.12em; color: #8C8A84">PLACEHOLDER · content/{{panel.file}}</span>
+</aside>
+</section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"reduceMotion":{"editor":"boolean","default":false,"section":"Motion"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+constructor(p) { super(p); this.state = { sel: 'pB' }; }
+renderVals() {
+const sel = this.state.sel;
+const W = 1200, H = 760;
+const people = [
+{ id: 'pA', label: '[Person A]', line: 'A', x: 540, y: 135, side: 'left', enters: 70, status: 'Still here', delay: 1.4 },
+{ id: 'pB', label: '[Person B]', line: 'B', x: 660, y: 270, side: 'right', enters: 210, status: 'Branched away · [YYYY]', delay: 2.0 },
+{ id: 'pC', label: '[Person C]', line: 'C', x: 470, y: 390, side: 'left', enters: 330, status: 'Ended · [YYYY]', delay: 2.6 },
+{ id: 'pD', label: '[Person D]', line: 'D', x: 720, y: 600, side: 'right', enters: 540, status: 'Still here', delay: 3.2 }
+];
+const events = [
+{ id: 'e1', y: 150, delay: 1.0 },
+{ id: 'e2', y: 450, delay: 1.6 },
+{ id: 'e3', y: 640, delay: 2.2 }
+];
+const anySel = !!sel;
+const lineOf = (id) => id === sel ? { stroke: '#FF5A1F', op: 1 } : { stroke: '#F2EFE8', op: anySel ? 0.4 : 0.7 };
+const evOf = (id) => ({ fill: id === sel ? '#FF5A1F' : '#F2EFE8' });
+const pct = (v, t) => (v / t * 100).toFixed(2) + '%';
+const items = [];
+people.forEach((p) => {
+const on = p.id === sel;
+const pos = p.side === 'left'
+? 'right: calc(' + pct(W - p.x, W) + ' + 6px); align-items: flex-end; text-align: right'
+: 'left: calc(' + pct(p.x, W) + ' + 6px); align-items: flex-start; text-align: left';
+items.push({
+label: p.label, sub: 'LINE ' + p.line, pressed: on ? 'true' : 'false',
+labelClass: 'serif',
+labelStyle: 'font-size: 20px; line-height: 1.1; color: ' + (on ? '#FF5A1F' : '#F2EFE8'),
+pick: () => this.setState({ sel: p.id }),
+btnStyle: 'position: absolute; top: ' + pct(p.y, H) + '; transform: translateY(-50%); ' + pos + '; display: flex; flex-direction: column; gap: 2px; min-height: 44px; justify-content: center; padding: 4px 8px; animation-delay: ' + p.delay + 's'
+});
+});
+events.forEach((e) => {
+const on = e.id === sel;
+items.push({
+label: '[Life event]', sub: '[YYYY]', pressed: on ? 'true' : 'false',
+labelClass: '',
+labelStyle: 'font-size: 14px; color: ' + (on ? '#FF5A1F' : '#F2EFE8'),
+pick: () => this.setState({ sel: e.id }),
+btnStyle: 'position: absolute; top: ' + pct(e.y, H) + '; right: 70%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 2px; min-height: 44px; justify-content: center; padding: 4px 8px; animation-delay: ' + e.delay + 's'
+});
+});
+const rail = people.map((p) => ({
+year: '[YYYY] · enters',
+style: 'position: absolute; top: ' + pct(p.enters, H) + '; right: 70%; transform: translateY(-50%); padding: 0 8px; font-size: 10px; letter-spacing: 0.12em; color: #8C8A84; white-space: nowrap; animation-delay: ' + (p.delay - 0.4) + 's'
+}));
+let panel;
+const p = people.find((x) => x.id === sel);
+if (p) {
+panel = { kind: 'PERSON · LINE ' + p.line, title: p.label, file: 'people.json',
+rows: [{ k: 'RELATIONSHIP', v: '[Relationship]' }, { k: 'ENTERS', v: '[YYYY]' }, { k: 'LINE', v: p.status }],
+note: '[A few lines about this person and what they changed. Written by you.]' };
+} else {
+panel = { kind: 'MOMENT', title: '[Life event]', file: 'timeline.json',
+rows: [{ k: 'WHEN', v: '[YYYY]' }, { k: 'CHAPTER', v: '[Chapter]' }],
+note: '[What happened, and why it stayed with you. Written by you.]' };
+}
+return {
+rootClass: this.props.reduceMotion ? 'sb rm' : 'sb',
+pA: lineOf('pA'), pB: lineOf('pB'), pC: lineOf('pC'), pD: lineOf('pD'),
+e1: evOf('e1'), e2: evOf('e2'), e3: evOf('e3'),
+items, rail, panel
+};
+}
+}
+</script>
+</body>
+</html>

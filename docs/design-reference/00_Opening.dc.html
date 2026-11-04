@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Still Becoming — Opening</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#111110}
+.sb{font-family:'Inter Tight',system-ui,sans-serif;color:#F2EFE8;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+a{color:#F2EFE8}a:hover{color:#FF5A1F}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes unveil{to{clip-path:inset(0 0 0 0)}}
+@keyframes cue{0%{transform:translateY(-14px);opacity:0}30%{opacity:1}100%{transform:translateY(56px);opacity:0}}
+.rise{opacity:0;animation:rise 1.2s cubic-bezier(.2,.7,.1,1) forwards}
+.fade{opacity:0;animation:fade 1.6s ease forwards}
+.unveil{clip-path:inset(100% 0 0 0);animation:unveil 1.6s cubic-bezier(.65,0,.35,1) .2s forwards}
+.cue{animation:cue 2.4s cubic-bezier(.65,0,.35,1) infinite}
+@media (prefers-reduced-motion:reduce){.sb .rise,.sb .fade{opacity:1;transform:none;animation:none}.sb .cue{animation:none}.sb .unveil{clip-path:none;animation:none}}
+.rm .rise,.rm .fade{opacity:1;transform:none;animation:none}.rm .cue{animation:none}.rm .unveil{clip-path:none;animation:none}
+</style>
+</helmet>
+<main class="{{rootClass}}" style="position: relative; box-sizing: border-box; width: 100%; min-height: 100vh; padding: 32px clamp(20px, 5vw, 72px); background: #111110; color: #F2EFE8; display: flex; flex-direction: column; gap: 48px; overflow: hidden">
+<header style="display: flex; justify-content: space-between; align-items: center; gap: 16px">
+<span class="mono" style="font-size: 12px; letter-spacing: 0.22em; color: #8C8A84">STILL BECOMING</span>
+<span class="mono" style="font-size: 12px; letter-spacing: 0.12em; color: #8C8A84">00 — Opening</span>
+</header>
+<section style="flex-grow: 1; display: flex; flex-wrap: wrap; align-items: flex-end; gap: clamp(32px, 6vw, 96px)">
+<figure class="unveil" style="margin: 0; position: relative; width: clamp(200px, 24vw, 340px); aspect-ratio: 3 / 4; box-sizing: border-box; padding: 16px; background: #1A1A18; border: 1px solid rgba(242,239,232,0.14); display: flex; align-items: flex-end">
+<span aria-hidden="true" style="position: absolute; top: 16px; left: 16px; width: 6px; height: 6px; border-radius: 50%; background: #FF5A1F"></span>
+<figcaption class="mono" style="font-size: 11px; line-height: 1.7; letter-spacing: 0.12em; color: #8C8A84">PORTRAIT · ASSET 01<br>B/W · 3:4 · lazy-loaded</figcaption>
+</figure>
+<div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 36px; padding-bottom: 8px">
+<h1 class="serif rise" style="margin: 0; font-size: clamp(56px, 8.4vw, 136px); line-height: 0.92; letter-spacing: -0.02em; animation-delay: 0.6s">Rohit</h1>
+<p class="serif" style="margin: 0; font-size: clamp(26px, 2.6vw, 40px); line-height: 1.2; display: flex; flex-direction: column">
+<span class="rise" style="animation-delay: 1.4s">Still becoming.</span>
+<span class="rise" style="animation-delay: 1.9s; font-style: italic">Still exploring.</span>
+<span class="rise" style="animation-delay: 2.4s">Still building<span style="color: #FF5A1F">.</span></span>
+</p>
+</div>
+</section>
+<footer style="display: flex; align-items: center; gap: 16px">
+<span aria-hidden="true" style="position: relative; display: block; width: 1px; height: 56px; background: rgba(242,239,232,0.18); overflow: hidden"><span class="cue" style="position: absolute; left: 0; top: 0; width: 1px; height: 14px; background: #FF5A1F"></span></span>
+<span class="mono fade" style="font-size: 12px; letter-spacing: 0.16em; color: #8C8A84; animation-delay: 3s">SCROLL TO ENTER</span>
+</footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"reduceMotion":{"editor":"boolean","default":false,"section":"Motion"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return { rootClass: this.props.reduceMotion ? 'sb rm' : 'sb' };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Still Becoming — Foundations</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#111110}
+.sb{font-family:'Inter Tight',system-ui,sans-serif;color:#F2EFE8;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+</style>
+</helmet>
+<main class="sb" style="width: 1440px; height: 1240px; box-sizing: border-box; padding: 72px; background: #111110; color: #F2EFE8; display: flex; flex-direction: column; gap: 56px">
+<header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-bottom: 32px; border-bottom: 1px solid rgba(242,239,232,0.12)">
+<h1 class="serif" style="margin: 0; font-size: 72px; line-height: 1; font-weight: 400">Foundations</h1>
+<span class="mono" style="font-size: 12px; letter-spacing: 0.16em; color: #8C8A84">STILL BECOMING · V0.1 · SEPARATE FROM AUTOSCALE LABS</span>
+</header>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px">
+<section style="display: flex; flex-direction: column; gap: 20px">
+<h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.18em; font-weight: 400; color: #FF5A1F">PALETTE</h2>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 16px"><span style="width: 56px; height: 56px; background: #111110; border: 1px solid rgba(242,239,232,0.2)"></span><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Deep ink</span><span class="mono" style="font-size: 11px; color: #8C8A84">#111110 · ground, ~90% of every scene</span></div></div>
+<div style="display: flex; align-items: center; gap: 16px"><span style="width: 56px; height: 56px; background: #F2EFE8"></span><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Warm paper</span><span class="mono" style="font-size: 11px; color: #8C8A84">#F2EFE8 · text, lines · ≈16.4:1</span></div></div>
+<div style="display: flex; align-items: center; gap: 16px"><span style="width: 56px; height: 56px; background: #FF5A1F"></span><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Signal accent</span><span class="mono" style="font-size: 11px; color: #8C8A84">#FF5A1F · selection, roots, one light · ≈6.1:1</span></div></div>
+<div style="display: flex; align-items: center; gap: 16px"><span style="width: 56px; height: 56px; background: #8C8A84"></span><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Paper, quiet</span><span class="mono" style="font-size: 11px; color: #8C8A84">#8C8A84 · labels, captions · ≈5.5:1</span></div></div>
+<div style="display: flex; align-items: center; gap: 16px"><span style="width: 56px; height: 56px; background: #0A0A09; border: 1px solid rgba(242,239,232,0.2)"></span><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Near-black</span><span class="mono" style="font-size: 11px; color: #8C8A84">#0A0A09 · the unfinished chapter only</span></div></div>
+</div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 20px">
+<h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.18em; font-weight: 400; color: #FF5A1F">TYPE</h2>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="serif" style="font-size: 64px; line-height: 1">Still becoming.</span><span class="mono" style="font-size: 11px; color: #8C8A84">Instrument Serif · display · clamp(56–160px) · italic for one beat only</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 18px; line-height: 1.6">Inter Tight carries the reading text: panels, notes, anything longer than a line.</span><span class="mono" style="font-size: 11px; color: #8C8A84">Inter Tight · body · 15–18px · 1.6</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span class="mono" style="font-size: 12px; letter-spacing: 0.16em">02 — LIFE TIMELINE · [YYYY]</span><span class="mono" style="font-size: 11px; color: #8C8A84">JetBrains Mono · labels, dates, chapter numbers · 10–12px, tracked</span></div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 20px">
+<h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.18em; font-weight: 400; color: #FF5A1F">MOTION</h2>
+<dl style="margin: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(242,239,232,0.08)"><dt style="font-size: 15px">Reveal</dt><dd class="mono" style="margin: 0; font-size: 11px; color: #8C8A84">1.2s · cubic-bezier(.2,.7,.1,1) · y 18→0</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(242,239,232,0.08)"><dt style="font-size: 15px">Line draw</dt><dd class="mono" style="margin: 0; font-size: 11px; color: #8C8A84">2.2–2.4s · cubic-bezier(.65,0,.35,1)</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(242,239,232,0.08)"><dt style="font-size: 15px">Stagger</dt><dd class="mono" style="margin: 0; font-size: 11px; color: #8C8A84">0.15s nodes · 0.5–0.6s lines</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(242,239,232,0.08)"><dt style="font-size: 15px">Ambient</dt><dd class="mono" style="margin: 0; font-size: 11px; color: #8C8A84">roots breathe 4.5s · stars 6s · particles 8s</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(242,239,232,0.08)"><dt style="font-size: 15px">Scroll</dt><dd class="mono" style="margin: 0; font-size: 11px; color: #8C8A84">ScrollTrigger scrub on line draws only</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 16px"><dt style="font-size: 15px">Reduced motion</dt><dd class="mono" style="margin: 0; font-size: 11px; color: #8C8A84">final state, no loops, no scrub</dd></div>
+</dl>
+</section>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px; flex-grow: 1">
+<section style="display: flex; flex-direction: column; gap: 20px">
+<h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.18em; font-weight: 400; color: #FF5A1F">LINE LANGUAGE</h2>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 16px"><svg width="72" height="12" aria-hidden="true"><line x1="0" y1="6" x2="72" y2="6" stroke="#F2EFE8" stroke-width="1.6"></line></svg><span style="font-size: 15px">Your line · 1.6px, always solid</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><svg width="72" height="12" aria-hidden="true"><line x1="0" y1="6" x2="56" y2="6" stroke="#F2EFE8" stroke-width="1.1"></line><line x1="58" y1="6" x2="72" y2="6" stroke="#F2EFE8" stroke-width="1.1" stroke-dasharray="2 5"></line></svg><span style="font-size: 15px">A person, still here · dotted tail</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><svg width="72" height="12" aria-hidden="true"><line x1="0" y1="6" x2="72" y2="6" stroke="#F2EFE8" stroke-width="1.1" stroke-dasharray="3 6"></line></svg><span style="font-size: 15px">Branched away · dashed, curves out</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><svg width="72" height="12" aria-hidden="true"><line x1="0" y1="6" x2="64" y2="6" stroke="#F2EFE8" stroke-width="1.1"></line><circle cx="67" cy="6" r="3" fill="#111110" stroke="#F2EFE8" stroke-width="1.1"></circle></svg><span style="font-size: 15px">Ended · open circle, never a cross</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><svg width="72" height="12" aria-hidden="true"><line x1="0" y1="6" x2="72" y2="6" stroke="#FF5A1F" stroke-width="1.1"></line></svg><span style="font-size: 15px">Selected · the only orange line on screen</span></div>
+</div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 20px">
+<h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.18em; font-weight: 400; color: #FF5A1F">BUILD · REACT + VITE</h2>
+<pre class="mono" style="margin: 0; font-size: 12px; line-height: 1.7; color: #F2EFE8; white-space: pre">src/
+  content/
+    site.json       name, statement, chapters
+    aspects.json    small branches: lit · dark · quiet
+    people.json     people and their lines
+    moments.json    moments on your line
+  scenes/
+    Opening.jsx
+    FoundingTree.jsx
+    LifeTimeline.jsx
+    Unfinished.jsx
+  ui/
+    StarField.jsx       one canvas layer
+    Constellation.jsx   svg map
+    InfoPanel.jsx
+    PersonLine.jsx
+  motion/
+    useReducedMotion.js
+    presets.js     gsap + ScrollTrigger
+  assets/   portrait.webp · tree.webp (lazy)</pre>
+</section>
+<section style="display: flex; flex-direction: column; gap: 20px">
+<h2 class="mono" style="margin: 0; font-size: 12px; letter-spacing: 0.18em; font-weight: 400; color: #FF5A1F">ADD A PERSON · NO UI CHANGES</h2>
+<pre class="mono" style="margin: 0; font-size: 12px; line-height: 1.7; color: #F2EFE8; white-space: pre">{
+  "id": "person-b",
+  "name": "[Person B]",
+  "relation": "[Relationship]",
+  "enters": "[YYYY]",
+  "leaves": "[YYYY]",
+  "status": "branched",
+  "side": "right",
+  "chapter": "iv",
+  "note": "[Written by you]"
+}</pre>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: #8C8A84">status: continues · branched · ended. Lane positions are computed from order and side, so a new entry finds its own place on the line.</p>
+</section>
+</div>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1240}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
