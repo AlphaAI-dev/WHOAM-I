@@ -69,8 +69,8 @@ export const assets = {
     alt: 'Portrait of Rohit',
     objectPosition: '50% 30%',
     fit: 'cover',
-    filter: 'grayscale(1) contrast(1.04)',
-    placeholder: 'PORTRAIT · ASSET 01\nadd src/assets/images/portrait.*',
+    filter: 'grayscale(1) sepia(0.35) contrast(1.06)',
+    placeholder: 'Portrait\nadd src/assets/images/portrait.*',
   },
   /**
    * The Founding Tree illustration. It is drawn under the SVG overlays.
@@ -85,7 +85,7 @@ export const assets = {
     alt: 'The Founding Tree: an illustrated tree whose branches are the chapters of this life',
     objectPosition: '50% 50%',
     fit: 'contain',
-    placeholder: 'FOUNDING TREE · ASSET 02\nadd src/assets/images/founding-tree.*',
+    placeholder: 'Founding Tree artwork\nadd src/assets/images/founding-tree.*',
   },
 } satisfies Record<string, ImageAsset>;
 

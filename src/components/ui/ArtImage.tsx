@@ -7,16 +7,18 @@ interface Props {
   priority?: boolean;
   className?: string;
   style?: CSSProperties;
+  /** Extra classes for the empty state (e.g. its text colour). */
+  placeholderClassName?: string;
   /** Called when the image is missing or fails to load. */
   onMissing?: () => void;
 }
 
 /**
- * Renders a configured image (WebP/AVIF first when available, original as
- * fallback). While the file is missing it renders a labelled empty frame
- * instead, so the layout stays the same.
+ * Renders a configured image (AVIF/WebP first when available, original as
+ * fallback). While the file is missing it renders a quiet labelled space
+ * instead, so the layout and the scene stay intact.
  */
-export function ArtImage({ asset, priority = false, className = '', style, onMissing }: Props) {
+export function ArtImage({ asset, priority = false, className = '', style, placeholderClassName = 'text-mocha/50', onMissing }: Props) {
   const [failed, setFailed] = useState(false);
 
   if (!asset.src || failed) {
@@ -24,12 +26,11 @@ export function ArtImage({ asset, priority = false, className = '', style, onMis
       <div
         role="img"
         aria-label={`${asset.alt} (image not added yet)`}
-        className={`flex items-end justify-start border border-dashed border-paper/15 bg-surface/60 p-4 ${className}`}
+        className={`flex items-end justify-center pb-[18%] ${placeholderClassName} ${className}`}
         style={style}
       >
-        <span className="label whitespace-pre-line text-[10px] leading-[1.7] text-quiet normal-case tracking-[0.12em]">
-          {asset.placeholder}
-        </span>
+        {/* The "add this file" hint is for development only; visitors see quiet empty space. */}
+        {import.meta.env.DEV && <span className="eyebrow text-center text-[9px] whitespace-pre-line">{asset.placeholder}</span>}
       </div>
     );
   }

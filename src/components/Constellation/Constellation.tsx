@@ -24,7 +24,7 @@ const { w: VW, h: VH } = C.viewBox;
  * Each point is a chapter; selecting one shows how it connects, and
  * "Go to chapter" takes you there. Close (or Escape) returns to where you were.
  */
-export function Constellation({ selected, onSelect, onClose, onNavigate }: Props) {
+export default function Constellation({ selected, onSelect, onClose, onNavigate }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const [hover, setHover] = useState<ChapterId | null>(null);
@@ -101,21 +101,21 @@ export function Constellation({ selected, onSelect, onClose, onNavigate }: Props
       role="dialog"
       aria-modal="true"
       aria-labelledby="map-title"
-      className="fixed inset-0 z-50 flex flex-col gap-6 overflow-y-auto bg-ink px-[clamp(20px,5vw,72px)] pt-4 pb-8"
+      className="sky-nebula fixed inset-0 z-[55] flex flex-col gap-6 overflow-y-auto px-[clamp(20px,5vw,72px)] pt-5 pb-8 text-cream"
     >
       <StarField reduced={reduced} />
 
       <header className="relative flex items-center justify-between gap-4">
-        <h2 id="map-title" className="label m-0 text-[12px] font-normal tracking-[0.22em] text-quiet">
+        <h2 id="map-title" className="eyebrow m-0 font-medium text-champagne/70">
           Still Becoming · Map
         </h2>
         <button
           type="button"
           onClick={() => close()}
           aria-label="Close map and return to the page"
-          className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2.5 text-quiet transition-colors hover:text-paper"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2.5 text-cream/70 transition-colors hover:text-champagne"
         >
-          <span className="label text-[12px] tracking-[0.16em]">Close</span>
+          <span className="eyebrow">Close</span>
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.2">
             <path d="M1 1 L13 13 M13 1 L1 13" />
           </svg>
@@ -125,17 +125,20 @@ export function Constellation({ selected, onSelect, onClose, onNavigate }: Props
       <div className="relative flex flex-1 flex-wrap-reverse items-end gap-8 md:flex-wrap">
         {/* Chapter details. */}
         <div data-anim="panel" aria-live="polite" className="flex max-w-[380px] flex-[1_1_300px] flex-col gap-4 pb-2 md:pb-6">
-          <span className="label text-[12px] tracking-[0.16em] text-accent">Chapter {active.num}</span>
-          <p className="m-0 font-serif text-[clamp(40px,4vw,56px)] leading-none">{active.name}</p>
-          <p className="m-0 text-base leading-[1.6] text-quiet">
+          <span className="eyebrow text-amber">Chapter {active.num}</span>
+          <p className="gold-text m-0 font-serif text-[clamp(48px,5vw,80px)] leading-[0.95]">{active.name}</p>
+          <p className="m-0 text-base leading-[1.6] text-cream/65">
             {linkedNames.length ? `Connected to ${joinNames(linkedNames)}.` : 'Not connected to anything yet.'}
           </p>
           <button
             type="button"
             onClick={() => close(() => onNavigate(act))}
-            className="cta self-start"
+            className="pill self-start text-champagne"
           >
-            Go to chapter →
+            Go to chapter
+            <svg width="16" height="8" viewBox="0 0 16 8" aria-hidden="true" fill="none" stroke="currentColor">
+              <path d="M0 4 H15 M11 1 L15 4 L11 7" />
+            </svg>
           </button>
         </div>
 
@@ -156,7 +159,7 @@ export function Constellation({ selected, onSelect, onClose, onNavigate }: Props
                       x2={C.points[b].x}
                       y2={C.points[b].y}
                       className="sb-tw"
-                      style={{ stroke: on ? colors.accent : colors.paper, strokeOpacity: on ? 0.85 : 0.16 }}
+                      style={{ stroke: on ? colors.ember : colors.champagne, strokeOpacity: on ? 0.9 : 0.2 }}
                     />
                   );
                 })}
@@ -166,8 +169,8 @@ export function Constellation({ selected, onSelect, onClose, onNavigate }: Props
                   y1={C.points.v.y}
                   x2={C.tail.x}
                   y2={C.tail.y}
-                  stroke={colors.paper}
-                  strokeOpacity={0.18}
+                  stroke={colors.champagne}
+                  strokeOpacity={0.25}
                   strokeDasharray="2 6"
                 />
               </g>
@@ -206,13 +209,13 @@ export function Constellation({ selected, onSelect, onClose, onNavigate }: Props
                       className="block rounded-full transition-all duration-500"
                       style={
                         on
-                          ? { width: 10, height: 10, background: colors.accent, boxShadow: '0 0 0 7px rgba(255,90,31,0.14)' }
-                          : { width: lit ? 7 : 5, height: lit ? 7 : 5, background: colors.paper, opacity: lit ? 1 : 0.6 }
+                          ? { width: 12, height: 12, background: colors.ember, boxShadow: '0 0 0 7px rgb(232 154 75 / 0.18), 0 0 28px 6px rgb(232 154 75 / 0.55)' }
+                          : { width: lit ? 7 : 5, height: lit ? 7 : 5, background: colors.champagne, opacity: lit ? 1 : 0.6, boxShadow: lit ? '0 0 12px 2px rgb(244 217 160 / 0.4)' : 'none' }
                       }
                     />
                   </span>
                   <span
-                    className={`label whitespace-nowrap transition-colors duration-500 ${lit ? 'text-paper' : 'text-quiet'}`}
+                    className={`eyebrow whitespace-nowrap transition-colors duration-500 ${lit ? 'text-champagne' : 'text-cream/45'}`}
                   >
                     {c.num}
                     <span className="hidden sm:inline"> · {c.name}</span>
@@ -225,7 +228,7 @@ export function Constellation({ selected, onSelect, onClose, onNavigate }: Props
         </div>
       </div>
 
-      <p className="label relative m-0 tracking-[0.12em] text-quiet normal-case">
+      <p className="eyebrow relative m-0 text-cream/40">
         Select a point, then go to its chapter. Esc or Close returns you to the page.
       </p>
     </div>

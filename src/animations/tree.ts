@@ -6,6 +6,7 @@
  *   Loops pause while the tree is off screen.
  * Under reduced motion nothing is animated: the final drawing is shown.
  */
+import { markIdleOffscreen } from './idle';
 import { gsap, ScrollTrigger, hideStroke } from './setup';
 import { motion } from '../config/theme';
 import type { MotionContext } from '../hooks/useGsap';
@@ -14,6 +15,8 @@ export function animateTree({ root, reduced }: MotionContext) {
   if (reduced) return;
   const q = gsap.utils.selector(root);
   const stage = q('[data-anim=stage]')[0] ?? root;
+
+  markIdleOffscreen(root);
 
   // 1. Line draws, tied to scroll.
   const trunk = q('[data-anim=trunk]');
@@ -40,17 +43,13 @@ export function animateTree({ root, reduced }: MotionContext) {
       0.5,
     );
 
-  // 3. Ambient loops, running only while the tree is on screen.
+  // 3. Ambient loops (all compositor-only), running only while the tree is on screen.
   const half = motion.ambient.breathe / 2;
   const loop = { repeat: -1, yoyo: true, ease: 'sine.inOut', paused: true } as const;
   const loops: gsap.core.Tween[] = [
-    gsap.to(q('[data-anim=breathe]'), { ...loop, opacity: 0.35, duration: half }),
-    ...q('[data-anim=glow-leaf]').map((el, i) =>
-      // Offset each aspect so they don't pulse in unison.
-      gsap.to(el, { ...loop, opacity: 0.35, duration: half }).totalTime((i * 0.73) % motion.ambient.breathe),
-    ),
+    gsap.to(q('[data-anim=breathe]'), { ...loop, opacity: 0.55, duration: half }),
     ...q('[data-anim=particle]').map((el, i) =>
-      gsap.to(el, { ...loop, y: -14, duration: motion.ambient.drift / 2 }).totalTime(i * 1.5),
+      gsap.to(el, { ...loop, y: -18, x: i % 2 ? 6 : -6, duration: motion.ambient.drift / 2 }).totalTime(i * 1.5),
     ),
   ];
   ScrollTrigger.create({
@@ -59,6 +58,28 @@ export function animateTree({ root, reduced }: MotionContext) {
     end: 'bottom top',
     onToggle: (self) => loops.forEach((t) => (self.isActive ? t.play() : t.pause())),
   });
+
+  // 4. Depth: layers drift against the pointer at different rates (mouse and pen only).
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const layers = q('[data-depth]').map((el) => {
+      const depth = parseFloat((el as HTMLElement).dataset.depth ?? '0');
+      return {
+        depth,
+        x: gsap.quickTo(el, 'x', { duration: 1.2, ease: 'power3.out' }),
+        y: gsap.quickTo(el, 'y', { duration: 1.2, ease: 'power3.out' }),
+      };
+    });
+    const onMove = (e: PointerEvent) => {
+      const nx = e.clientX / window.innerWidth - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
+      for (const l of layers) {
+        l.x(nx * 60 * l.depth);
+        l.y(ny * 40 * l.depth);
+      }
+    };
+    root.addEventListener('pointermove', onMove);
+    return () => root.removeEventListener('pointermove', onMove);
+  }
 }
 
 /** Short fade when the selected chapter's details change. */

@@ -1,42 +1,42 @@
 /**
- * People who entered the life line.
+ * People whose lines join yours on the life timeline.
  *
  * ADD A PERSON: copy an entry and edit it. No UI changes are needed: the
- * timeline gives each person a lane beside the central line from their
- * chapter, their position in this list and their `side`.
+ * timeline gives each person a lane on their `side` of your line and draws
+ * them from `start` to `end` on the same scale as the chapters
+ * (see src/data/chapters.ts).
  *
  * Everything in [square brackets] is a placeholder and is shown on the site
  * marked as one. These entries only demonstrate the three kinds of line;
  * they are not real people.
  */
-import type { ChapterId } from './chapters';
 
 export type PersonStatus =
-  /** Still here: the line runs on to the present and fades into a dotted tail. */
+  /** Still here: walks beside you up to now. */
   | 'continues'
-  /** Branched away: the line leaves and curves outward, dashed. */
+  /** Walked with you for a while, then their line curved away. */
   | 'branched'
-  /** Ended: the line stops in an open circle (never a cross). */
+  /** Their line ended; they rise and stay in your sky as a star. */
   | 'ended';
 
 export interface Person {
   id: string;
   name: string;
   relation: string;
-  /** Year (or any short label) when they entered. */
+  /** Shown in the details, e.g. a year. */
   enters: string;
-  /** Year they left; leave as '' for people who continue. */
+  /** Shown in the details; leave '' for people who continue. */
   leaves: string;
   status: PersonStatus;
-  /** Which side of the central line their lane is on. */
+  /** Which side of your line their lane is on. */
   side: 'left' | 'right';
-  /** Chapter they entered in. */
-  chapter: ChapterId;
-  /** For `branched` and `ended`: the chapter in which the line leaves. */
-  until?: ChapterId;
+  /** When their line joins yours (chapter scale). */
+  start: number;
+  /** When it branches away or ends (ignored for `continues`). */
+  end?: number;
+  /** Optional line colour; defaults to the next colour in theme.lineColors. */
+  color?: string;
   note: string;
-  /** Optional position within the chapter, shared with moments (see data/timeline.ts). */
-  order?: number;
 }
 
 export const people: Person[] = [
@@ -48,7 +48,7 @@ export const people: Person[] = [
     leaves: '',
     status: 'continues',
     side: 'left',
-    chapter: 'i',
+    start: 0,
     note: '[A few lines about this person and what they changed. Written by you.]',
   },
   {
@@ -57,10 +57,10 @@ export const people: Person[] = [
     relation: '[Relationship]',
     enters: '[YYYY]',
     leaves: '[YYYY]',
-    status: 'branched',
+    status: 'ended',
     side: 'right',
-    chapter: 'ii',
-    until: 'iii',
+    start: 0,
+    end: 38,
     note: '[A few lines about this person and what they changed. Written by you.]',
   },
   {
@@ -69,10 +69,10 @@ export const people: Person[] = [
     relation: '[Relationship]',
     enters: '[YYYY]',
     leaves: '[YYYY]',
-    status: 'ended',
-    side: 'left',
-    chapter: 'iii',
-    until: 'iii',
+    status: 'branched',
+    side: 'right',
+    start: 12,
+    end: 34,
     note: '[A few lines about this person and what they changed. Written by you.]',
   },
   {
@@ -82,8 +82,43 @@ export const people: Person[] = [
     enters: '[YYYY]',
     leaves: '',
     status: 'continues',
+    side: 'left',
+    start: 26,
+    note: '[A few lines about this person and what they changed. Written by you.]',
+  },
+  {
+    id: 'person-e',
+    name: '[Person E]',
+    relation: '[Relationship]',
+    enters: '[YYYY]',
+    leaves: '[YYYY]',
+    status: 'branched',
     side: 'right',
-    chapter: 'iv',
+    start: 48,
+    end: 66,
+    note: '[A few lines about this person and what they changed. Written by you.]',
+  },
+  {
+    id: 'person-f',
+    name: '[Person F]',
+    relation: '[Relationship]',
+    enters: '[YYYY]',
+    leaves: '[YYYY]',
+    status: 'ended',
+    side: 'left',
+    start: 8,
+    end: 78,
+    note: '[A few lines about this person and what they changed. Written by you.]',
+  },
+  {
+    id: 'person-g',
+    name: '[Person G]',
+    relation: '[Relationship]',
+    enters: '[YYYY]',
+    leaves: '',
+    status: 'continues',
+    side: 'right',
+    start: 74,
     note: '[A few lines about this person and what they changed. Written by you.]',
   },
 ];
