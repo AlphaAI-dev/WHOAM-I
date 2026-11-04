@@ -12,19 +12,6 @@ interface Props {
   onChapter: (id: ChapterId) => void;
 }
 
-/** Words that gather around the portrait as you scroll (built from the site's own text). */
-const CLOUD = [
-  ...site.statement.map((s) => s.replace('.', '')),
-  ...chapters.map((c) => `${c.num} ${c.name}`),
-  'Still', 'becoming', 'exploring', 'building', 'unwritten', 'roots', 'learning', 'people',
-];
-const cloudLines = (offset: number) =>
-  Array.from({ length: 14 }, (_, i) => {
-    const a = CLOUD[(i * 3 + offset) % CLOUD.length];
-    const b = CLOUD[(i * 5 + offset + 2) % CLOUD.length];
-    return `${a} · ${b}`;
-  });
-
 /** 00 — Opening. */
 export function Hero({ onChapter }: Props) {
   const ref = useRef<HTMLElement>(null);
@@ -58,16 +45,23 @@ export function Hero({ onChapter }: Props) {
           {name}
         </div>
 
-        {/* Word cloud around the portrait. */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-[22%] bottom-[24%] hidden justify-center gap-[min(28vw,420px)] md:flex">
-          {[0, 7].map((off) => (
-            <div key={off} className={`flex flex-col justify-center gap-1 ${off ? 'items-start' : 'items-end'}`}>
-              {cloudLines(off).map((l, i) => (
-                <span key={i} data-anim="cloud" className="eyebrow text-[9.5px] whitespace-nowrap text-mocha/70 opacity-0">
-                  {l}
-                </span>
-              ))}
-            </div>
+        {/* Rohit's own statement surfaces around the portrait while the scene is pinned. */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-[clamp(20px,5vw,72px)] top-[30%] z-[5] hidden justify-between md:flex">
+          {site.statement.map((s, i) => (
+            <span
+              key={s}
+              data-anim="say"
+              className={`font-serif text-[clamp(30px,3.6vw,58px)] leading-none text-mocha opacity-0 ${i === 1 ? 'mt-[16vh] italic' : ''} ${i === 2 ? 'mt-[6vh]' : ''}`}
+            >
+              {i === site.statement.length - 1 && s.endsWith('.') ? (
+                <>
+                  {s.slice(0, -1)}
+                  <span className="text-amber">.</span>
+                </>
+              ) : (
+                s
+              )}
+            </span>
           ))}
         </div>
 
@@ -147,14 +141,16 @@ export function Hero({ onChapter }: Props) {
         </ul>
 
         <div
-          className="intro-fade absolute top-1/2 left-[clamp(20px,5vw,72px)] z-10 hidden -translate-y-1/2 flex-col gap-1 lg:flex"
+          className="intro-fade absolute top-1/2 left-[clamp(20px,5vw,72px)] z-10 hidden -translate-y-1/2 lg:block"
           style={{ ['--d' as string]: '1800ms' }}
         >
-          {site.statement.map((s, i) => (
-            <span key={s} className={`font-serif text-[22px] leading-tight ${i === 1 ? 'italic' : ''} text-mocha/80`}>
-              {s}
-            </span>
-          ))}
+          <div data-anim="statement-small" className="flex flex-col gap-1">
+            {site.statement.map((s, i) => (
+              <span key={s} className={`font-serif text-[22px] leading-tight ${i === 1 ? 'italic' : ''} text-mocha/80`}>
+                {s}
+              </span>
+            ))}
+          </div>
         </div>
 
         <a
@@ -167,13 +163,6 @@ export function Hero({ onChapter }: Props) {
           </span>
           <span className="eyebrow">Scroll</span>
         </a>
-
-        <span
-          className="eyebrow intro-fade absolute right-[clamp(20px,5vw,72px)] bottom-8 z-10 hidden text-mocha/60 sm:block"
-          style={{ ['--d' as string]: '2200ms' }}
-        >
-          Index 00 / 03
-        </span>
 
         <BlockWipe name="hero-out" lead={colors.amber} settle={colors.roast} />
 

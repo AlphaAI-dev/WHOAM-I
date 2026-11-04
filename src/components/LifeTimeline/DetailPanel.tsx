@@ -38,7 +38,6 @@ export function DetailPanel({ selection, onClose }: Props) {
   let title: string;
   let rows: { k: string; v: string }[];
   let note: string;
-  let file: string;
   if (selection.kind === 'person') {
     const p = selection.person;
     const c = chapterAt(p.start);
@@ -52,7 +51,6 @@ export function DetailPanel({ selection, onClose }: Props) {
       { k: 'Chapter', v: `${c.num} — ${c.name}` },
     ];
     note = p.note;
-    file = 'src/data/people.ts';
   } else {
     const m = selection.moment;
     const c = chapterAt(m.at);
@@ -63,9 +61,10 @@ export function DetailPanel({ selection, onClose }: Props) {
       { k: 'Chapter', v: `${c.num} — ${c.name}` },
     ];
     note = m.note;
-    file = 'src/data/timeline.ts';
   }
-  const placeholder = [title, note, ...rows.map((r) => r.v)].some(isPlaceholder);
+  // Fields that are still placeholders are simply left out.
+  rows = rows.filter((r) => r.v && !isPlaceholder(r.v));
+  const showNote = !!note && !isPlaceholder(note);
 
   return (
     <aside
@@ -100,13 +99,10 @@ export function DetailPanel({ selection, onClose }: Props) {
           </div>
         ))}
       </dl>
-      <p data-anim="swap" className="m-0 text-[15px] leading-[1.6] text-cream/70">
-        {note}
-      </p>
-      {placeholder && (
-        <span data-anim="swap" className="placeholder-tag self-start">
-          Placeholder · {file}
-        </span>
+      {showNote && (
+        <p data-anim="swap" className="m-0 text-[15px] leading-[1.6] text-cream/70">
+          {note}
+        </p>
       )}
     </aside>
   );

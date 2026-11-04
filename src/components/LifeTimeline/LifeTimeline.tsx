@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { chapterAt, chapters, timeRange, type Chapter } from '../../data/chapters';
 import { people } from '../../data/people';
 import { moments } from '../../data/timeline';
-import { site } from '../../data/site';
+import { isPlaceholder, site } from '../../data/site';
 import { colors, motion } from '../../config/theme';
 import { gsap, ScrollTrigger } from '../../animations/setup';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
@@ -221,7 +221,8 @@ export function LifeTimeline() {
           >
             {site.name}
           </button>
-          {people.map((p) => (
+          {/* Only real names get a label; placeholder entries stay as unnamed lines. */}
+          {people.filter((p) => !isPlaceholder(p.name)).map((p) => (
             <button
               key={p.id}
               ref={setLabel(p.id)}
@@ -236,7 +237,7 @@ export function LifeTimeline() {
               {p.name}
             </button>
           ))}
-          {moments.map((m) => (
+          {moments.filter((m) => !isPlaceholder(m.title)).map((m) => (
             <button
               key={m.id}
               ref={setLabel(m.id)}

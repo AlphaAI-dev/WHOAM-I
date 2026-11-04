@@ -271,13 +271,10 @@ export function FoundingTree({ selected, onSelect, onEnter }: Props) {
             <h3 data-anim="swap" className="gold-text m-0 font-serif text-[clamp(48px,5vw,80px)] leading-[0.9] font-normal">
               {sel.name}
             </h3>
-            <p data-anim="swap" className="m-0 text-base leading-[1.65] text-cream/70">
-              {sel.summary}
-            </p>
-            {isPlaceholder(sel.summary) && (
-              <span data-anim="swap" className="placeholder-tag self-start text-champagne/70">
-                Placeholder · src/data/chapters.ts
-              </span>
+            {!isPlaceholder(sel.summary) && (
+              <p data-anim="swap" className="m-0 text-base leading-[1.65] text-cream/70">
+                {sel.summary}
+              </p>
             )}
             <div data-anim="swap" className="eyebrow flex gap-6 text-cream/60">
               <span className="inline-flex items-center gap-2">

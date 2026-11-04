@@ -29,7 +29,8 @@ export function ArtImage({ asset, priority = false, className = '', style, place
         className={`flex items-end justify-center pb-[18%] ${placeholderClassName} ${className}`}
         style={style}
       >
-        <span className="eyebrow text-center text-[9px] whitespace-pre-line">{asset.placeholder}</span>
+        {/* The "add this file" hint is for development only; visitors see quiet empty space. */}
+        {import.meta.env.DEV && <span className="eyebrow text-center text-[9px] whitespace-pre-line">{asset.placeholder}</span>}
       </div>
     );
   }

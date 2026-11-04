@@ -3,7 +3,7 @@
  *
  * The scene pins for about one screen of scrolling:
  * 1. the outlined name drifts up and apart, the lockup lifts away,
- * 2. a cloud of words gathers around the portrait, line by line,
+ * 2. Rohit's statement rises around the portrait, one line at a time,
  * 3. blocks of amber, then roast, wipe the scene into the Founding Tree.
  */
 import { markIdleOffscreen } from './idle';
@@ -41,7 +41,8 @@ export function animateHero({ root, reduced }: MotionContext) {
   tl.to(q('[data-anim=ghost]'), { yPercent: -18, scale: 1.12, opacity: 0.4, duration: 1 }, 0)
     .to(q('[data-anim=lockup]'), { yPercent: 30, opacity: 0, duration: 0.7 }, 0.05)
     .to(q('[data-anim=portrait]'), { scale: 1.06, yPercent: -2, duration: 1, transformOrigin: '50% 100%' }, 0)
-    .to(q('[data-anim=cloud]'), { opacity: 1, duration: 0.08, stagger: { each: 0.025, from: 'center' } }, 0.15);
+    .to(q('[data-anim=statement-small]'), { opacity: 0, duration: 0.15 }, 0.05)
+    .fromTo(q('[data-anim=say]'), { opacity: 0, yPercent: 60 }, { opacity: 1, yPercent: 0, duration: 0.18, stagger: 0.12 }, 0.12);
 
   // The wipe: amber leads, roast settles, in a scattered order.
   tl.to(q('[data-wipe=hero-out] [data-block=lead]'), { scaleY: 1, duration: 0.25, stagger: { each: 0.004, from: 'random' } }, 0.72)
