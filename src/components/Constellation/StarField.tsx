@@ -11,6 +11,7 @@ interface Star {
   o: number;
   phase: number;
   drift: number;
+  warm: boolean;
 }
 
 function makeStars(): Star[] {
@@ -22,6 +23,7 @@ function makeStars(): Star[] {
     o: 0.15 + rnd() * 0.45,
     phase: rnd(),
     drift: rnd() * Math.PI * 2,
+    warm: rnd() < 0.35,
   }));
 }
 
@@ -51,7 +53,6 @@ export function StarField({ reduced }: { reduced: boolean }) {
 
     const draw = (t: number) => {
       ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = colors.paper;
       const period = motion.ambient.twinkle;
       for (const s of stars) {
         // Twinkle between full and 35% of the star's own brightness.
@@ -59,6 +60,7 @@ export function StarField({ reduced }: { reduced: boolean }) {
         const dx = reduced ? 0 : Math.sin(t / 14 + s.drift) * 1.5;
         const dy = reduced ? 0 : Math.cos(t / 17 + s.drift) * 1.5;
         ctx.globalAlpha = s.o * k;
+        ctx.fillStyle = s.warm ? colors.champagne : '#FFF8EC';
         ctx.beginPath();
         ctx.arc(s.x * w + dx, s.y * h + dy, s.r, 0, Math.PI * 2);
         ctx.fill();

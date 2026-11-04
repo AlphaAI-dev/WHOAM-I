@@ -1,21 +1,60 @@
 @import 'tailwindcss';
 
+/* ------------------------------------------------------------------ */
+/* Fonts: self-hosted, Latin subset (SIL Open Font License).           */
+/* The two used above the fold are preloaded in index.html.            */
+/* ------------------------------------------------------------------ */
+@font-face {
+  font-family: 'Archivo Expanded';
+  src: url('/fonts/archivo-expanded-800.woff2') format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pinyon Script';
+  src: url('/fonts/pinyon-script-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('/fonts/cormorant-garamond-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('/fonts/cormorant-garamond-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/inter-tight-var.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 /*
  * Design tokens. Mirror of src/config/theme.ts: keep the two in sync.
- * Tailwind turns these into utilities: bg-ink, text-paper, text-accent,
- * font-serif, font-mono, …
  */
 @theme {
-  --color-ink: #111110;
-  --color-paper: #f2efe8;
-  --color-accent: #ff5a1f;
-  --color-quiet: #8c8a84;
-  --color-night: #0a0a09;
-  --color-surface: #1a1a18;
+  --color-mocha: #5b4632;
+  --color-champagne: #f4d9a0;
+  --color-amber: #c8792c;
+  --color-cream: #f7eedc;
+  --color-sand: #eadbbe;
+  --color-latte: #a68b6d;
+  --color-roast: #3a2b1f;
+  --color-espresso: #21170f;
+  --color-night: #140d08;
+  --color-ember: #e89a4b;
 
-  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-display: 'Archivo Expanded', 'Archivo', 'Arial Black', system-ui, sans-serif;
+  --font-script: 'Pinyon Script', 'Snell Roundhand', cursive;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Inter Tight', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   --ease-reveal: cubic-bezier(0.2, 0.7, 0.1, 1);
   --ease-draw: cubic-bezier(0.65, 0, 0.35, 1);
@@ -23,31 +62,23 @@
 
 @layer base {
   html {
-    background: var(--color-ink);
-    color: var(--color-paper);
-    color-scheme: dark;
+    background: var(--color-cream);
+    color: var(--color-mocha);
     -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
   }
-
   body {
     margin: 0;
-    background: var(--color-ink);
+    background: var(--color-cream);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
-
-  /* Sections that the map and the tree navigate to clear the fixed header. */
-  [id] {
-    scroll-margin-top: 72px;
-  }
-
   ::selection {
-    background: var(--color-accent);
-    color: var(--color-ink);
+    background: var(--color-amber);
+    color: var(--color-cream);
   }
-
   button {
     font: inherit;
     color: inherit;
@@ -56,82 +87,251 @@
     padding: 0;
     cursor: pointer;
   }
-
   a {
     color: inherit;
   }
-
   :where(a, button):focus-visible {
-    outline: 1px solid var(--color-accent);
+    outline: 1px solid var(--color-amber);
     outline-offset: 4px;
   }
-
   svg {
     overflow: visible;
   }
 }
 
 @layer components {
-  /* Mono labels: dates, chapter numbers, captions. */
-  .label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
+  /* Small, widely tracked labels (the editorial voice of the page). */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
+    line-height: 1.7;
   }
 
-  /* Link styled as a tracked mono call to action. */
-  .cta {
+  /* Pill call to action. */
+  .pill {
     display: inline-flex;
     align-items: center;
+    gap: 14px;
     min-height: 44px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.16em;
+    padding: 0 22px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
     text-decoration: none;
-    border-bottom: 1px solid rgb(242 239 232 / 0.3);
-    transition: color 0.3s ease, border-color 0.3s ease;
+    transition:
+      background-color 0.4s var(--ease-reveal),
+      color 0.4s var(--ease-reveal),
+      border-color 0.4s var(--ease-reveal);
   }
-  .cta:hover {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
+  .pill:hover {
+    background: var(--color-amber);
+    border-color: var(--color-amber);
+    color: var(--color-cream);
+  }
+  .pill svg {
+    transition: transform 0.4s var(--ease-reveal);
+  }
+  .pill:hover svg {
+    transform: translateX(4px);
   }
 
-  /* Small "placeholder" tag beside content that still needs writing. */
   .placeholder-tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
+    font-family: var(--font-sans);
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-quiet);
-    border: 1px dashed rgb(242 239 232 / 0.2);
-    padding: 2px 6px;
-    border-radius: 3px;
+    opacity: 0.7;
+    border: 1px dashed currentColor;
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+
+  /* Warm translucent card used over dark scenes (no backdrop blur: it is costly while scrolling). */
+  .glass-card {
+    background: linear-gradient(160deg, rgb(91 70 50 / 0.82), rgb(33 23 15 / 0.92));
+    border: 1px solid rgb(244 217 160 / 0.16);
+    box-shadow:
+      0 30px 80px -20px rgb(0 0 0 / 0.6),
+      inset 0 1px 0 rgb(244 217 160 / 0.12);
+  }
+
+  /* Big outlined letters in the background of scenes. */
+  .outline-type {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.2px currentColor;
+  }
+
+  /* Gold text that catches light. */
+  .gold-text {
+    background: linear-gradient(100deg, #b98a4a 0%, #f4d9a0 30%, #fff3d6 45%, #f4d9a0 60%, #c8792c 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }
 
-/* SVG strokes that change with selection (branches, twigs, person lines). */
+/* ------------------------------------------------------------------ */
+/* Depth: grain, light and the night sky                               */
+/* ------------------------------------------------------------------ */
+
+/* A fixed film-grain layer over everything (static, so it costs nothing per frame). */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  /* No blend mode: plain alpha keeps this layer free to composite on every frame. */
+  will-change: transform;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.18 0 0 0 0 0.1 0 0 0 1.2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Soft drifting pools of light on the cream scenes: radial gradients, not blur
+   filters, so they cost nothing to draw and move on the compositor. */
+.light-pool {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  background: radial-gradient(closest-side, var(--pool), transparent);
+}
+
+/* Night sky of the life timeline. */
+.sky-nebula {
+  background:
+    radial-gradient(60% 45% at 75% 18%, rgb(200 121 44 / 0.16), transparent 70%),
+    radial-gradient(50% 40% at 18% 30%, rgb(91 70 50 / 0.55), transparent 70%),
+    radial-gradient(70% 50% at 50% 110%, rgb(58 43 31 / 0.9), transparent 70%),
+    linear-gradient(180deg, #2a1d14 0%, var(--color-espresso) 55%, #170f09 100%);
+}
+
+/* Labels that ride on the canvas lines. */
+.sky-label {
+  will-change: transform, opacity;
+  opacity: 0;
+  text-shadow: 0 0 12px rgb(0 0 0 / 0.8);
+  transition: color 0.4s ease;
+}
+.sky-label:hover {
+  color: var(--color-ember);
+}
+
+/* Light beams in the Founding Tree scene. The falloff is a gradient laid over
+   the beams in the scene colour (no mask, which is costly to composite). */
+.beams {
+  background:
+    radial-gradient(85% 75% at 80% 0%, transparent 0%, rgb(58 43 31 / 0.6) 55%, var(--color-roast) 80%),
+    repeating-linear-gradient(105deg, rgb(244 217 160 / 0) 0 60px, rgb(244 217 160 / 0.07) 60px 90px, rgb(244 217 160 / 0) 90px 160px);
+  mix-blend-mode: normal;
+  opacity: 0.9;
+}
+
 .sb-tw {
   transition: stroke 0.5s ease, stroke-opacity 0.5s ease, fill 0.5s ease, opacity 0.5s ease;
 }
 
-/* The scroll cue is pure CSS, so it also stops under reduced motion. */
+/* ------------------------------------------------------------------ */
+/* Opening sequence: pure CSS, so it plays on the very first paint,    */
+/* before any JavaScript has loaded.                                   */
+/* ------------------------------------------------------------------ */
+@keyframes sb-rise {
+  from { transform: translateY(110%); }
+  to { transform: none; }
+}
+@keyframes sb-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes sb-unveil {
+  from { clip-path: inset(100% 0 0 0); transform: scale(1.08); }
+  to { clip-path: inset(0 0 0 0); transform: none; }
+}
+@keyframes sb-write {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes sb-block-out {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0); }
+}
+@keyframes sb-shimmer {
+  0%, 100% { background-position: 100% 0; }
+  50% { background-position: 0% 0; }
+}
+@keyframes sb-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, -3%, 0) scale(1.08); }
+}
 @keyframes sb-cue {
   0% { transform: translateY(-14px); opacity: 0; }
   30% { opacity: 1; }
-  100% { transform: translateY(56px); opacity: 0; }
+  100% { transform: translateY(44px); opacity: 0; }
+}
+@keyframes sb-chapter {
+  from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+.intro-block {
+  transform-origin: top;
+  animation: sb-block-out 0.9s var(--ease-draw) both;
+  animation-delay: var(--d, 0ms);
+}
+.intro-char {
+  display: inline-block;
+  animation: sb-rise 1.1s var(--ease-reveal) both;
+  animation-delay: calc(700ms + var(--i, 0) * 55ms);
+}
+.intro-fade {
+  animation: sb-fade-up 1.2s var(--ease-reveal) both;
+  animation-delay: var(--d, 1200ms);
+}
+.intro-unveil {
+  animation: sb-unveil 1.6s var(--ease-draw) both;
+  animation-delay: 450ms;
+}
+.intro-write {
+  animation: sb-write 1.6s var(--ease-draw) both;
+  animation-delay: 1300ms;
+}
+.shimmer {
+  animation: sb-shimmer 7s ease-in-out infinite;
+}
+.drift {
+  animation: sb-drift 14s ease-in-out infinite;
+}
+/* Ambient loops run only while their scene is on screen (scenes toggle .is-live). */
+.is-idle .shimmer,
+.is-idle .drift {
+  animation-play-state: paused;
 }
 .scroll-cue {
   animation: sb-cue 2.4s var(--ease-draw) infinite;
 }
+.chapter-swap {
+  animation: sb-chapter 0.8s var(--ease-reveal) both;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-    scroll-behavior: auto;
+  .intro-block {
+    display: none;
   }
-  .scroll-cue {
-    animation: none;
+  .intro-char,
+  .intro-fade,
+  .intro-unveil,
+  .intro-write,
+  .shimmer,
+  .drift,
+  .scroll-cue,
+  .chapter-swap {
+    animation: none !important;
   }
   *,
   *::before,

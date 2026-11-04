@@ -1,34 +1,49 @@
 /**
- * Opening: the portrait unveils upward, the name and the three lines rise in
- * sequence, then the scroll cue appears. Leaving the scene softly fades it.
- * Timings follow docs/design-reference/00_Opening.dc.html.
+ * Opening scroll sequence (the intro itself is CSS, see styles/index.css).
+ *
+ * The scene pins for about one screen of scrolling:
+ * 1. the outlined name drifts up and apart, the lockup lifts away,
+ * 2. a cloud of words gathers around the portrait, line by line,
+ * 3. blocks of amber, then roast, wipe the scene into the Founding Tree.
  */
+import { markIdleOffscreen } from './idle';
 import { gsap } from './setup';
-import { motion } from '../config/theme';
 import type { MotionContext } from '../hooks/useGsap';
 
 export function animateHero({ root, reduced }: MotionContext) {
   if (reduced) return;
   const q = gsap.utils.selector(root);
-  const { duration, y } = motion.reveal;
+  const stage = q('[data-anim=stage]')[0];
+  let wasDark = false;
 
-  const intro = gsap.timeline({ defaults: { ease: motion.ease.reveal } });
-  intro
-    .fromTo(
-      q('[data-anim=portrait]'),
-      { clipPath: 'inset(100% 0% 0% 0%)' },
-      { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: motion.ease.draw, clearProps: 'clipPath' },
-      0.2,
-    )
-    .from(q('[data-anim=name]'), { opacity: 0, y, duration }, 0.6)
-    .from(q('[data-anim=line]'), { opacity: 0, y, duration, stagger: 0.5 }, 1.4)
-    .from(q('[data-anim=cue]'), { opacity: 0, duration: 1.6, ease: 'power1.out' }, 3);
+  markIdleOffscreen(root);
 
-  // Leaving the opening: a gentle fade, no parallax.
-  gsap.to(q('[data-anim=hero-inner]'), {
-    opacity: 0.15,
-    y: -32,
-    ease: 'none',
-    scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: motion.scrub },
+  const tl = gsap.timeline({
+    defaults: { ease: 'none' },
+    scrollTrigger: {
+      trigger: stage,
+      start: 'top top',
+      end: '+=140%',
+      pin: true,
+      scrub: 0.8,
+      anticipatePin: 1,
+      // Once the wipe has darkened the screen, the navigation switches to light text.
+      onUpdate: (self) => {
+        const dark = self.progress > 0.8;
+        if (dark !== wasDark) {
+          wasDark = dark;
+          window.dispatchEvent(new CustomEvent('sb:nav-theme', { detail: { dark } }));
+        }
+      },
+    },
   });
+
+  tl.to(q('[data-anim=ghost]'), { yPercent: -18, scale: 1.12, opacity: 0.4, duration: 1 }, 0)
+    .to(q('[data-anim=lockup]'), { yPercent: 30, opacity: 0, duration: 0.7 }, 0.05)
+    .to(q('[data-anim=portrait]'), { scale: 1.06, yPercent: -2, duration: 1, transformOrigin: '50% 100%' }, 0)
+    .to(q('[data-anim=cloud]'), { opacity: 1, duration: 0.08, stagger: { each: 0.025, from: 'center' } }, 0.15);
+
+  // The wipe: amber leads, roast settles, in a scattered order.
+  tl.to(q('[data-wipe=hero-out] [data-block=lead]'), { scaleY: 1, duration: 0.25, stagger: { each: 0.004, from: 'random' } }, 0.72)
+    .to(q('[data-wipe=hero-out] [data-block=settle]'), { scaleY: 1, duration: 0.25, stagger: { each: 0.004, from: 'random' } }, 0.84);
 }

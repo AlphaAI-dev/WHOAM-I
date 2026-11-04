@@ -1,71 +1,196 @@
 import { useRef } from 'react';
 import { assets } from '../../config/assets';
+import { colors } from '../../config/theme';
+import { chapters, type ChapterId } from '../../data/chapters';
 import { site } from '../../data/site';
 import { useGsap } from '../../hooks/useGsap';
 import { animateHero } from '../../animations/hero';
 import { ArtImage } from '../ui/ArtImage';
+import { BlockWipe } from '../ui/BlockWipe';
 
-/** 00 — Opening: the portrait and the statement. */
-export function Hero() {
+interface Props {
+  onChapter: (id: ChapterId) => void;
+}
+
+/** Words that gather around the portrait as you scroll (built from the site's own text). */
+const CLOUD = [
+  ...site.statement.map((s) => s.replace('.', '')),
+  ...chapters.map((c) => `${c.num} ${c.name}`),
+  'Still', 'becoming', 'exploring', 'building', 'unwritten', 'roots', 'learning', 'people',
+];
+const cloudLines = (offset: number) =>
+  Array.from({ length: 14 }, (_, i) => {
+    const a = CLOUD[(i * 3 + offset) % CLOUD.length];
+    const b = CLOUD[(i * 5 + offset + 2) % CLOUD.length];
+    return `${a} · ${b}`;
+  });
+
+/** 00 — Opening. */
+export function Hero({ onChapter }: Props) {
   const ref = useRef<HTMLElement>(null);
   useGsap(ref, animateHero);
-
-  const lastIdx = site.statement.length - 1;
+  const name = site.name.toUpperCase();
 
   return (
     <section
       id="opening"
-      data-section="opening"
       ref={ref}
+      data-section="opening"
+      data-theme="light"
       aria-label="Opening"
-      className="relative flex min-h-svh flex-col overflow-hidden px-[clamp(20px,5vw,72px)] pt-24 pb-8"
+      className="relative bg-cream"
     >
-      <div
-        data-anim="hero-inner"
-        className="flex flex-1 flex-wrap items-end gap-x-[clamp(32px,6vw,96px)] gap-y-10"
-      >
+      <div data-anim="stage" className="relative h-svh min-h-[560px] w-full overflow-hidden">
+        {/* Light. */}
+        <div aria-hidden="true" className="absolute inset-0">
+          <div className="light-pool drift" style={{ width: '75vw', height: '75vw', left: '-22vw', top: '-28vw', ['--pool' as string]: 'rgb(244 217 160 / 0.85)' }} />
+          <div className="light-pool drift" style={{ width: '60vw', height: '60vw', right: '-18vw', top: '8%', ['--pool' as string]: 'rgb(200 121 44 / 0.26)', animationDelay: '-6s' }} />
+          <div className="light-pool" style={{ width: '90vw', height: '42vw', left: '5vw', bottom: '-20vw', ['--pool' as string]: 'rgb(91 70 50 / 0.16)' }} />
+        </div>
+
+        {/* Giant outlined name. */}
+        <div
+          data-anim="ghost"
+          aria-hidden="true"
+          style={{ willChange: 'transform' }}
+          className="outline-type pointer-events-none absolute inset-x-0 top-[13%] text-center font-display text-[31vw] leading-[0.8] tracking-[-0.04em] whitespace-nowrap text-mocha/25 select-none"
+        >
+          {name}
+        </div>
+
+        {/* Word cloud around the portrait. */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-[22%] bottom-[24%] hidden justify-center gap-[min(28vw,420px)] md:flex">
+          {[0, 7].map((off) => (
+            <div key={off} className={`flex flex-col justify-center gap-1 ${off ? 'items-start' : 'items-end'}`}>
+              {cloudLines(off).map((l, i) => (
+                <span key={i} data-anim="cloud" className="eyebrow text-[9.5px] whitespace-nowrap text-mocha/70 opacity-0">
+                  {l}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Portrait. */}
         <figure
           data-anim="portrait"
-          className="relative m-0 aspect-[3/4] w-[clamp(200px,24vw,340px)] shrink-0 overflow-hidden border border-paper/14 bg-surface"
+          style={{ willChange: 'transform' }}
+          className="absolute bottom-0 left-1/2 m-0 aspect-[3/4] h-[74svh] max-h-[860px] -translate-x-1/2"
         >
-          <ArtImage asset={assets.portrait} priority className="absolute inset-0 h-full w-full" />
-          <span aria-hidden="true" className="absolute top-4 left-4 size-1.5 rounded-full bg-accent" />
+          <div className="intro-unveil relative h-full w-full overflow-hidden rounded-t-[999px]">
+            <ArtImage
+              asset={assets.portrait}
+              priority
+              className="absolute inset-0 h-full w-full"
+              style={{
+                maskImage: 'linear-gradient(to bottom, black 70%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent)',
+              }}
+            />
+            {!assets.portrait.src && (
+              <div
+                aria-hidden="true"
+                className="absolute inset-0"
+                style={{
+                  background: `radial-gradient(70% 55% at 50% 38%, ${colors.champagne}, transparent 70%), linear-gradient(180deg, rgb(234 219 190 / 0.9), rgb(247 238 220 / 0) 92%)`,
+                }}
+              />
+            )}
+          </div>
         </figure>
 
-        <div className="flex min-w-0 flex-[999_1_520px] flex-col gap-9 pb-2">
-          <h1
-            data-anim="name"
-            className="m-0 font-serif text-[clamp(56px,8.4vw,136px)] leading-[0.92] font-normal tracking-[-0.02em]"
-          >
-            {site.name}
+        {/* Name lockup: script over bold. */}
+        <div data-anim="lockup" style={{ willChange: 'transform' }} className="pointer-events-none absolute inset-x-0 bottom-[7svh] z-10 flex flex-col items-center px-4">
+          <span className="intro-write relative z-10 -mb-[0.32em] -ml-[30vw] font-script text-[clamp(40px,7vw,120px)] leading-none text-amber sm:-ml-[22vw]">
+            Still becoming
+          </span>
+          <h1 className="m-0 overflow-hidden font-display text-[clamp(68px,15.5vw,250px)] leading-[0.9] font-extrabold tracking-[-0.03em] text-mocha">
+            <span className="sr-only">{site.name}</span>
+            <span aria-hidden="true" className="inline-flex">
+              {name.split('').map((ch, i) => (
+                <span key={i} className="intro-char" style={{ ['--i' as string]: i }}>
+                  {ch}
+                </span>
+              ))}
+            </span>
           </h1>
-          <p className="m-0 flex flex-col font-serif text-[clamp(26px,2.6vw,40px)] leading-[1.2]">
-            {site.statement.map((line, i) => (
-              <span key={line} data-anim="line" className={i === 1 ? 'italic' : undefined}>
-                {i === lastIdx && line.endsWith('.') ? (
-                  <>
-                    {line.slice(0, -1)}
-                    <span className="text-accent">.</span>
-                  </>
-                ) : (
-                  line
-                )}
-              </span>
-            ))}
+        </div>
+
+        {/* Editorial details. */}
+        <div className="intro-fade absolute top-24 left-[clamp(20px,5vw,72px)] z-10 flex flex-col gap-6 sm:top-28" style={{ ['--d' as string]: '1500ms' }}>
+          <span className="font-display text-[42px] leading-none text-mocha/90">00</span>
+          <p className="eyebrow m-0 text-mocha/70">
+            A life
+            <br />
+            in five
+            <br />
+            chapters
           </p>
+          <span aria-hidden="true" className="block h-px w-8 bg-mocha/40" />
+        </div>
+
+        <ul
+          className="intro-fade absolute top-28 right-[clamp(20px,5vw,72px)] z-10 m-0 hidden list-none flex-col items-end gap-1.5 p-0 md:flex"
+          style={{ ['--d' as string]: '1650ms' }}
+        >
+          {chapters.map((c) => (
+            <li key={c.id}>
+              <button
+                type="button"
+                onClick={() => onChapter(c.id)}
+                className="eyebrow min-h-7 text-mocha/60 transition-colors hover:text-amber"
+              >
+                {c.num} · {c.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div
+          className="intro-fade absolute top-1/2 left-[clamp(20px,5vw,72px)] z-10 hidden -translate-y-1/2 flex-col gap-1 lg:flex"
+          style={{ ['--d' as string]: '1800ms' }}
+        >
+          {site.statement.map((s, i) => (
+            <span key={s} className={`font-serif text-[22px] leading-tight ${i === 1 ? 'italic' : ''} text-mocha/80`}>
+              {s}
+            </span>
+          ))}
+        </div>
+
+        <a
+          href="#tree"
+          className="intro-fade absolute bottom-8 left-[clamp(20px,5vw,72px)] z-10 hidden items-center gap-4 text-mocha/70 no-underline transition-colors hover:text-amber sm:flex"
+          style={{ ['--d' as string]: '2200ms' }}
+        >
+          <span aria-hidden="true" className="relative block h-11 w-px overflow-hidden bg-mocha/20">
+            <span className="scroll-cue absolute top-0 left-0 h-3 w-px bg-amber" />
+          </span>
+          <span className="eyebrow">Scroll</span>
+        </a>
+
+        <span
+          className="eyebrow intro-fade absolute right-[clamp(20px,5vw,72px)] bottom-8 z-10 hidden text-mocha/60 sm:block"
+          style={{ ['--d' as string]: '2200ms' }}
+        >
+          Index 00 / 03
+        </span>
+
+        <BlockWipe name="hero-out" lead={colors.amber} settle={colors.roast} />
+
+        {/* Opening curtain: blocks that lift on first paint (CSS only). */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-40 grid grid-cols-8">
+          {Array.from({ length: 8 }, (_, i) => (
+            <span
+              key={i}
+              className="intro-block block h-full"
+              style={{
+                background: i % 3 === 1 ? colors.amber : colors.mocha,
+                ['--d' as string]: `${[0, 90, 40, 140, 20, 110, 60, 160][i]}ms`,
+              }}
+            />
+          ))}
         </div>
       </div>
-
-      <a
-        href="#tree"
-        data-anim="cue"
-        className="mt-12 inline-flex items-center gap-4 self-start text-quiet no-underline transition-colors hover:text-paper"
-      >
-        <span aria-hidden="true" className="relative block h-14 w-px overflow-hidden bg-paper/18">
-          <span className="scroll-cue absolute top-0 left-0 h-3.5 w-px bg-accent" />
-        </span>
-        <span className="label text-[12px] tracking-[0.16em]">Scroll to enter</span>
-      </a>
     </section>
   );
 }

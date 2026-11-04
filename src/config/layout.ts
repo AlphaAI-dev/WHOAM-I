@@ -89,29 +89,3 @@ export const constellation = {
   starCount: 110,
   starSeed: 7,
 } as const;
-
-/* ------------------------------------------------------------------ */
-/* Life timeline                                                       */
-/* ------------------------------------------------------------------ */
-
-export const timeline = {
-  /** Vertical distance between rows (an entry, a moment or a chapter heading). */
-  rowHeight: { mobile: 84, desktop: 104 },
-  /** Space above the first row and below the last line. */
-  padTop: 56,
-  padBottom: 120,
-  /** Horizontal distance between neighbouring person lanes, beside the central line. */
-  laneGap: { mobile: 30, desktop: 64 },
-  /** How far a "branched away" line curves outward after it leaves. */
-  branchOut: { mobile: 40, desktop: 150 },
-  /** Length of the dotted "continues" tail below the last row. */
-  tail: 56,
-  /** Where the central line sits, as a fraction of the width. */
-  centre: { mobile: 0.5, desktop: 0.5 },
-} as const;
-
-/** Breakpoint (px) where layouts switch from the mobile to the desktop arrangement. */
-export const breakpoints = { desktop: 1024, tablet: 640 } as const;
-
-/** Height of the fixed header; scrolling to a section leaves this much room. */
-export const headerOffset = 64;

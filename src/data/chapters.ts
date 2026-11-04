@@ -1,9 +1,13 @@
 /**
  * The five chapters. They are the branches of the Founding Tree, the points
- * of the constellation map and the sections of the life timeline.
+ * of the constellation map and the eras of the life timeline.
  *
  * Anything in [square brackets] is a placeholder and appears on the site
  * marked as one. Replace it with your own words.
+ *
+ * `start` places the chapter on the life timeline. The timeline runs over
+ * whatever range of numbers you use: 0–100 (as here), your age, or real years
+ * such as 2004–2026 all work, as long as people and moments use the same scale.
  */
 
 export type ChapterId = 'i' | 'ii' | 'iii' | 'iv' | 'v';
@@ -15,6 +19,8 @@ export interface Chapter {
   name: string;
   /** Two or three lines on what this chapter holds. */
   summary: string;
+  /** Where the chapter begins on the life timeline. The last chapter's start is "now". */
+  start: number;
   /** Chapters this one is connected to on the constellation map. */
   links: ChapterId[];
 }
@@ -25,6 +31,7 @@ export const chapters: Chapter[] = [
     num: 'I',
     name: 'Roots',
     summary: '[Two or three lines on what this chapter holds. Written by you.]',
+    start: 0,
     links: ['ii'],
   },
   {
@@ -32,6 +39,7 @@ export const chapters: Chapter[] = [
     num: 'II',
     name: 'Learning',
     summary: '[Two or three lines on what this chapter holds. Written by you.]',
+    start: 22,
     links: ['i', 'iii', 'iv'],
   },
   {
@@ -39,6 +47,7 @@ export const chapters: Chapter[] = [
     num: 'III',
     name: 'Building',
     summary: '[Two or three lines on what this chapter holds. Written by you.]',
+    start: 46,
     links: ['ii', 'iv'],
   },
   {
@@ -46,6 +55,7 @@ export const chapters: Chapter[] = [
     num: 'IV',
     name: 'People',
     summary: '[Two or three lines on what this chapter holds. Written by you.]',
+    start: 70,
     links: ['iii', 'v', 'ii'],
   },
   {
@@ -53,6 +63,7 @@ export const chapters: Chapter[] = [
     num: 'V',
     name: 'Unwritten',
     summary: 'The chapter that has not happened yet.',
+    start: 100,
     links: ['iv'],
   },
 ];
@@ -62,7 +73,15 @@ export const defaultChapter: ChapterId = 'iii';
 
 export const chapterById = Object.fromEntries(chapters.map((c) => [c.id, c])) as Record<ChapterId, Chapter>;
 
-/** DOM id of the place each chapter navigates to. The last chapter leads to the closing scene. */
-export function chapterAnchor(id: ChapterId): string {
-  return id === 'v' ? 'closing' : `chapter-${id}`;
+/** Timeline range: from the first chapter to "now" (the start of the last chapter). */
+export const timeRange = {
+  min: chapters[0].start,
+  max: chapters[chapters.length - 1].start,
+};
+
+/** The chapter a point in time belongs to. */
+export function chapterAt(t: number): Chapter {
+  let current = chapters[0];
+  for (const c of chapters) if (t >= c.start) current = c;
+  return current;
 }

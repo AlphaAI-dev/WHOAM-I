@@ -4,16 +4,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CustomEase } from 'gsap/CustomEase';
 import { easeCurves } from '../config/theme';
 
-gsap.registerPlugin(ScrollTrigger, CustomEase);
+const inBrowser = typeof window !== 'undefined';
 
-for (const [name, [x1, y1, x2, y2]] of Object.entries(easeCurves)) {
-  CustomEase.create(name, `M0,0 C${x1},${y1} ${x2},${y2} 1,1`);
+if (inBrowser) {
+  gsap.registerPlugin(ScrollTrigger, CustomEase);
+  for (const [name, [x1, y1, x2, y2]] of Object.entries(easeCurves)) {
+    CustomEase.create(name, `M0,0 C${x1},${y1} ${x2},${y2} 1,1`);
+  }
+  gsap.defaults({ ease: 'sb-reveal' });
+  // Touch devices: don't recalculate when the address bar shows or hides.
+  ScrollTrigger.config({ ignoreMobileResize: true });
 }
-
-gsap.defaults({ ease: 'sb-reveal' });
-
-// Touch devices: don't recalculate on the address bar showing/hiding.
-ScrollTrigger.config({ ignoreMobileResize: true });
 
 export { gsap, ScrollTrigger };
 
